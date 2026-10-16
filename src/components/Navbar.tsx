@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Zap, Menu, X, ArrowRight, ShieldCheck } from "lucide-react";
+import { Zap, Menu, X, ArrowUpRight, ArrowRight, ShieldCheck, Search } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
   onOpenAudit: () => void;
@@ -20,11 +21,11 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { label: "Problems & Solutions", href: "#problem-solution" },
-    { label: "What We Build", href: "#services" },
-    { label: "Project Types", href: "#projects" },
-    { label: "How It Works", href: "#process" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Navigate your next", href: "#problem-solution" },
+    { label: "Capabilities", href: "#services" },
+    { label: "Tales of Transformation", href: "#projects" },
+    { label: "Implementation Framework", href: "#process" },
+    { label: "Insights & FAQ", href: "#faq" },
   ];
 
   return (
@@ -37,15 +38,13 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           right: 0,
           zIndex: 1000,
           transition: "all 0.3s ease",
-          background: scrolled
-            ? "rgba(6, 6, 8, 0.88)"
-            : "rgba(6, 6, 8, 0.5)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
+          background: scrolled ? "var(--nav-bg)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
           borderBottom: scrolled
-            ? "1px solid rgba(255, 85, 0, 0.2)"
-            : "1px solid rgba(255, 255, 255, 0.05)",
-          padding: scrolled ? "0.75rem 0" : "1.2rem 0",
+            ? "1px solid var(--border-glass)"
+            : "1px solid transparent",
+          padding: scrolled ? "0.75rem 0" : "1.25rem 0",
         }}
       >
         <div
@@ -56,64 +55,105 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
             justifyContent: "space-between",
           }}
         >
-          {/* Brand Logo */}
-          <a
-            href="#"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.75rem",
-              textDecoration: "none",
-            }}
-          >
-            <div
+          {/* Left Group: Circular Hamburger Menu & Logo */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            {/* Circular Infosys Hamburger Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Navigation Menu"
               style={{
-                width: "32px",
-                height: "32px",
-                borderRadius: "10px",
-                background: "linear-gradient(135deg, #ff5500, #ff8c42)",
+                width: "42px",
+                height: "42px",
+                borderRadius: "50%",
+                backgroundColor: "var(--bg-surface-1)",
+                border: "1px solid var(--border-glass-strong)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                boxShadow: "0 0 18px rgba(255, 85, 0, 0.45)",
+                cursor: "pointer",
+                color: "var(--text-primary)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--infosys-blue)";
+                e.currentTarget.style.color = "var(--infosys-blue)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-glass-strong)";
+                e.currentTarget.style.color = "var(--text-primary)";
               }}
             >
-              <Zap size={22} color="#000000" strokeWidth={2.6} />
-            </div>
-            <div>
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+
+            {/* Brand Logo (Infosys Minimal Wordmark Style) */}
+            <a
+              href="#"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.6rem",
+                textDecoration: "none",
+              }}
+            >
               <div
                 style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "1.4rem",
-                  fontWeight: 800,
-                  letterSpacing: "-0.03em",
-                  color: "#ffffff",
-                  lineHeight: 1,
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "8px",
+                  background: "var(--infosys-blue)",
                   display: "flex",
                   alignItems: "center",
-                  gap: "2px",
+                  justifyContent: "center",
+                  color: "#ffffff",
+                }}
+              >
+                <Zap size={18} strokeWidth={2.5} />
+              </div>
+              <div
+                style={{
+                  fontSize: "1.45rem",
+                  fontWeight: 800,
+                  letterSpacing: "-0.04em",
+                  color: "var(--text-primary)",
+                  display: "flex",
+                  alignItems: "center",
                 }}
               >
                 VenTek
-                <span style={{ color: "var(--orange-500)" }}>.</span>
+                <span style={{ color: "var(--infosys-blue)", marginLeft: "1px" }}>.</span>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="nav-desktop-links">
+          {/* Center Group: Floating Pill Navigation Bar (Signature Infosys Design) */}
+          <nav
+            className="nav-desktop-links"
+            style={{
+              backgroundColor: "var(--nav-pill-bg)",
+              border: "1px solid var(--border-glass-strong)",
+              borderRadius: "9999px",
+              padding: "0.45rem 1.4rem",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.04)",
+              gap: "1.5rem",
+            }}
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize: "0.9rem",
-                  fontWeight: 500,
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
                   color: "var(--text-secondary)",
                   transition: "color 0.2s ease",
+                  letterSpacing: "-0.01em",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--orange-400)")
+                  (e.currentTarget.style.color = "var(--infosys-blue)")
                 }
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.color = "var(--text-secondary)")
@@ -124,81 +164,93 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
             ))}
           </nav>
 
-          {/* Desktop Right Action Area */}
-          <div className="nav-desktop-actions">
+          {/* Right Group: Theme Toggle & Infosys Capsule Button */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <ThemeToggle />
 
-
-            {/* High CTR CTA Button */}
+            {/* Infosys Capsule CTA Button (e.g. "Ask VenTek" / "Contact Us ↗") */}
             <button
               onClick={onOpenAudit}
-              className="btn-primary btn-sm"
-              style={{ fontSize: "0.88rem" }}
+              className="btn-infosys-dark btn-sm"
+              style={{
+                borderRadius: "9999px",
+                padding: "0.55rem 1.35rem",
+                fontSize: "0.86rem",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+              }}
             >
-              <span>Book Free Audit</span>
-              <ArrowRight size={15} />
+              <Zap size={14} color="var(--sky-400)" />
+              <span>Contact Us</span>
+              <ArrowUpRight size={15} />
             </button>
           </div>
-
-          {/* Mobile Hamburger Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle mobile menu"
-            className="nav-mobile-toggle"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Enterprise Drawer / Overlay Menu */}
       {mobileMenuOpen && (
         <div
           style={{
             position: "fixed",
-            top: "65px",
+            top: "74px",
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: "rgba(6, 6, 8, 0.97)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
+            backgroundColor: "var(--bg-primary)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
             zIndex: 999,
-            padding: "2rem 1.5rem",
+            padding: "2.5rem 1.5rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            borderBottom: "1px solid var(--border-orange)",
+            overflowY: "auto",
+            borderBottom: "1px solid var(--border-glass-strong)",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.2rem",
-            }}
-          >
-
-
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  fontSize: "1.25rem",
-                  fontWeight: 600,
-                  color: "#ffffff",
-                  padding: "0.75rem 0",
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span>{link.label}</span>
-                <ArrowRight size={18} color="var(--orange-400)" />
-              </a>
-            ))}
+          <div>
+            <div
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                color: "var(--infosys-blue)",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                marginBottom: "1.25rem",
+              }}
+            >
+              Navigation
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+              }}
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    fontSize: "1.2rem",
+                    fontWeight: 700,
+                    color: "var(--text-primary)",
+                    padding: "0.85rem 0",
+                    borderBottom: "1px solid var(--border-glass)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span>{link.label}</span>
+                  <ArrowUpRight size={18} color="var(--infosys-blue)" />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div
@@ -206,7 +258,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
-              paddingTop: "2rem",
+              paddingTop: "2.5rem",
             }}
           >
             <button
@@ -214,11 +266,11 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                 setMobileMenuOpen(false);
                 onOpenAudit();
               }}
-              className="btn-primary"
+              className="btn-infosys-primary"
               style={{ width: "100%", padding: "1rem" }}
             >
-              <span>Get Your Free Tech Audit</span>
-              <ArrowRight size={18} />
+              <span>Contact Us</span>
+              <ArrowUpRight size={18} />
             </button>
             <div
               style={{
@@ -228,10 +280,11 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                 gap: "0.5rem",
                 color: "var(--text-muted)",
                 fontSize: "0.825rem",
+                textAlign: "center",
               }}
             >
-              <ShieldCheck size={16} color="var(--orange-500)" />
-              <span>No technical talk. 100% free practical blueprint.</span>
+              <ShieldCheck size={16} color="var(--infosys-blue)" />
+              <span>Direct engineer consultation • Zero obligations</span>
             </div>
           </div>
         </div>

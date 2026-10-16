@@ -6,9 +6,11 @@ import {
   TrendingDown,
   FileQuestion,
   UserX,
-  ArrowRight,
+  ArrowUpRight,
   ShieldAlert,
-  CheckCircle,
+  CheckCircle2,
+  AlertCircle,
+  Zap,
 } from "lucide-react";
 
 interface ProblemsSectionProps {
@@ -18,6 +20,7 @@ interface ProblemsSectionProps {
 export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
   const problems = [
     {
+      num: "01",
       icon: Clock,
       title: "Get your work done quicker",
       description:
@@ -25,6 +28,7 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
       loss: "Average waste: 15 to 25 hours per employee every single week.",
     },
     {
+      num: "02",
       icon: UserX,
       title: "Losing Interested Customers Because of Slow Replies",
       description:
@@ -32,6 +36,7 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
       loss: "Average loss: 40% of inbound inquiries go cold due to delay.",
     },
     {
+      num: "03",
       icon: TrendingDown,
       title: "Having a Website That Doesn't Bring In New Clients",
       description:
@@ -39,6 +44,7 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
       loss: "Average impact: 9 out of 10 visitors bounce without leaving contact details.",
     },
     {
+      num: "04",
       icon: FileQuestion,
       title: "Managing Operations Through 8 Different Spreadsheets",
       description:
@@ -50,39 +56,38 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
   return (
     <section
       style={{
-        padding: "6rem 0",
+        padding: "6.5rem 0",
         position: "relative",
-        backgroundColor: "var(--bg-black)",
-        borderTop: "1px solid var(--border-glass)",
-        borderBottom: "1px solid var(--border-glass)",
       }}
     >
       <div className="site-container">
-        {/* Section Header */}
+        {/* Section Eyebrow & Header */}
         <div
           style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             textAlign: "center",
-            maxWidth: "800px",
+            maxWidth: "850px",
             margin: "0 auto 3.5rem auto",
           }}
         >
-          <div
-            className="badge-pill orange-pill"
-            style={{ marginBottom: "1rem" }}
-          >
-            <ShieldAlert size={15} color="var(--orange-400)" />
-            <span>THE REALITY CHECK</span>
+          <div className="infosys-tag">
+            <ShieldAlert size={16} />
+            <span>THE REALITY CHECK • WHY BUSINESSES GET STUCK</span>
           </div>
 
           <h2
             style={{
-              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
-              marginBottom: "1.2rem",
+              lineHeight: 1.15,
+              marginBottom: "1.25rem",
+              color: "var(--text-primary)",
             }}
           >
             Is Your Business Working For You...{" "}
-            <span className="text-gradient-fire">
+            <span className="text-gradient-sky">
               Or Are You Working For Your Business?
             </span>
           </h2>
@@ -92,6 +97,7 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
               fontSize: "1.1rem",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
+              maxWidth: "750px",
             }}
           >
             Every day without the right technology, your company leaks time, money, and valuable clients.
@@ -99,7 +105,7 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
           </p>
         </div>
 
-        {/* 4 Problems Grid */}
+        {/* 4 Clean Enterprise Problem Cards (Infosys Modular Grid) */}
         <div
           style={{
             display: "grid",
@@ -118,33 +124,52 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  backgroundColor: "var(--bg-surface-1)",
-                  border: "1px solid rgba(255, 255, 255, 0.07)",
+                  padding: "2rem",
+                  borderRadius: "16px",
+                  border: "1px solid var(--card-border)",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
               >
+                {/* Number watermark */}
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "1.25rem",
+                    right: "1.5rem",
+                    fontSize: "1.5rem",
+                    fontWeight: 800,
+                    color: "var(--text-dim)",
+                    opacity: 0.4,
+                    fontFamily: "var(--font-mono, monospace)",
+                  }}
+                >
+                  {prob.num}
+                </div>
+
                 <div>
                   <div
                     style={{
-                      width: "48px",
-                      height: "48px",
-                      borderRadius: "12px",
-                      backgroundColor: "rgba(239, 68, 68, 0.12)",
-                      border: "1px solid rgba(239, 68, 68, 0.25)",
+                      width: "44px",
+                      height: "44px",
+                      borderRadius: "10px",
+                      backgroundColor: "rgba(239, 68, 68, 0.08)",
+                      border: "1px solid rgba(239, 68, 68, 0.2)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      color: "#f87171",
+                      color: "#ef4444",
                       marginBottom: "1.5rem",
                     }}
                   >
-                    <IconComp size={24} />
+                    <IconComp size={22} />
                   </div>
 
                   <h3
                     style={{
                       fontSize: "1.2rem",
                       fontWeight: 700,
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                       marginBottom: "0.85rem",
                       lineHeight: 1.3,
                     }}
@@ -164,15 +189,17 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                   </p>
                 </div>
 
+                {/* Quantitative Impact Indicator */}
                 <div
                   style={{
                     padding: "0.75rem 1rem",
-                    borderRadius: "var(--radius-sm)",
-                    backgroundColor: "rgba(239, 68, 68, 0.08)",
+                    borderRadius: "8px",
+                    backgroundColor: "rgba(239, 68, 68, 0.06)",
                     borderLeft: "3px solid #ef4444",
                     fontSize: "0.825rem",
                     fontWeight: 600,
-                    color: "#fca5a5",
+                    color: "#ef4444",
+                    lineHeight: 1.4,
                   }}
                 >
                   {prob.loss}
@@ -182,60 +209,90 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
           })}
         </div>
 
-        {/* The Solution Bridge Callout */}
+        {/* ======================================================================== */}
+        {/* SIGNATURE INFOSYS "CRAFTING INTELLIGENT EXPERIENCES" CALLOUT BANNER     */}
+        {/* ======================================================================== */}
         <div
           style={{
-            background: "linear-gradient(135deg, rgba(255, 85, 0, 0.12) 0%, rgba(20, 20, 26, 0.95) 100%)",
-            border: "1px solid var(--border-orange)",
-            borderRadius: "var(--radius-lg)",
-            padding: "2.5rem 2rem",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1.5rem",
+            borderRadius: "20px",
+            background: "linear-gradient(135deg, #091222 0%, #0d1e3d 60%, #10264f 100%)",
+            color: "#ffffff",
+            padding: "3.5rem 2.5rem",
+            position: "relative",
+            overflow: "hidden",
+            boxShadow: "0 15px 35px rgba(9, 18, 34, 0.35)",
+            textAlign: "center",
           }}
         >
-          <div style={{ maxWidth: "680px" }}>
+          {/* Subtle Accent Glow */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-50px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "450px",
+              height: "150px",
+              background: "radial-gradient(circle, rgba(0, 124, 195, 0.35) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          <div style={{ maxWidth: "820px", margin: "0 auto", position: "relative", zIndex: 1 }}>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.4rem",
-                color: "var(--orange-400)",
+                gap: "0.45rem",
+                color: "#7dd3fc",
                 fontWeight: 700,
-                fontSize: "0.85rem",
+                fontSize: "0.82rem",
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                marginBottom: "0.5rem",
+                letterSpacing: "0.1em",
+                marginBottom: "0.85rem",
               }}
             >
-              <CheckCircle size={16} />
+              <CheckCircle2 size={16} color="#38bdf8" />
               <span>THE VENTEK COMMITMENT</span>
             </div>
+
             <h3
               style={{
-                fontSize: "1.6rem",
+                fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
                 fontWeight: 800,
                 color: "#ffffff",
-                marginBottom: "0.6rem",
+                lineHeight: 1.2,
+                marginBottom: "1rem",
               }}
             >
-              You don&apos;t need to become a programmer. We build the exact system for you.
+              You don&apos;t need to become a programmer.{" "}
+              <span style={{ color: "#38bdf8" }}>We build the exact system for you.</span>
             </h3>
-            <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-              In a free 30-minute discovery chat, we inspect your current business workflow, pinpoint your biggest time drains, and show you exactly how custom software or AI will fix it.
-            </p>
-          </div>
 
-          <button
-            onClick={onOpenAudit}
-            className="btn-primary"
-            style={{ padding: "0.95rem 1.8rem" }}
-          >
-            <span>Contact Us</span>
-            <ArrowRight size={18} />
-          </button>
+            <p
+              style={{
+                color: "#cbd5e1",
+                fontSize: "1.05rem",
+                lineHeight: 1.6,
+                maxWidth: "700px",
+                margin: "0 auto 2rem auto",
+              }}
+            >
+              In a free 30-minute discovery chat, we inspect your current business workflow, pinpoint
+              your biggest time drains, and show you exactly how custom software or AI will fix it.
+            </p>
+
+            <button
+              onClick={onOpenAudit}
+              className="btn-infosys-primary btn-lg"
+              style={{
+                boxShadow: "0 4px 20px rgba(0, 124, 195, 0.4)",
+              }}
+            >
+              <span>Contact Us</span>
+              <ArrowUpRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </section>

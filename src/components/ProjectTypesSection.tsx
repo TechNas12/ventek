@@ -7,10 +7,13 @@ import {
   Layout,
   GitFork,
   Check,
-  ArrowRight,
+  ArrowUpRight,
   ShieldCheck,
   Clock,
   Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
 } from "lucide-react";
 
 interface ProjectTypesSectionProps {
@@ -25,7 +28,8 @@ export default function ProjectTypesSection({
   const projectTypes = [
     {
       id: "management",
-      title: "1. Management Systems",
+      index: "01",
+      title: "Management Systems",
       icon: FolderKanban,
       subtitle: "Custom portals, operations hubs & client dashboards",
       summary:
@@ -45,10 +49,13 @@ export default function ProjectTypesSection({
         "One-click executive business health dashboard",
       ],
       turnaround: "18 to 24 Days",
+      gradient: "linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #0f172a 100%)",
+      accentTag: "Enterprise Portal Architecture",
     },
     {
       id: "agentic",
-      title: "2. GenAI & Agentic Systems",
+      index: "02",
+      title: "GenAI & Agentic Systems",
       icon: Cpu,
       subtitle: "Autonomous AI workers trained specifically on your company data",
       summary:
@@ -68,10 +75,13 @@ export default function ProjectTypesSection({
         "Human-in-the-loop controls for sensitive customer actions",
       ],
       turnaround: "14 to 20 Days",
+      gradient: "linear-gradient(135deg, #6366f1 0%, #4338ca 50%, #0a0f1d 100%)",
+      accentTag: "Autonomous Generative Intelligence",
     },
     {
       id: "web-dev",
-      title: "3. Web Development",
+      index: "03",
+      title: "Web Development",
       icon: Layout,
       subtitle: "High-performance web applications and conversion-focused flagships",
       summary:
@@ -91,10 +101,13 @@ export default function ProjectTypesSection({
         "Easy-to-use admin panel for posting news, case studies, and photos",
       ],
       turnaround: "10 to 14 Days",
+      gradient: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #07101e 100%)",
+      accentTag: "Sub-Second Next.js Performance",
     },
     {
       id: "data-pipelines",
-      title: "4. Data Pipelines",
+      index: "04",
+      title: "Data Pipelines",
       icon: GitFork,
       subtitle: "Automated real-time data bridges between your apps & dashboards",
       summary:
@@ -114,11 +127,21 @@ export default function ProjectTypesSection({
         "Zero manual CSV exports or copy-pasting forever",
       ],
       turnaround: "12 to 16 Days",
+      gradient: "linear-gradient(135deg, #38bdf8 0%, #0369a1 50%, #0b1329 100%)",
+      accentTag: "Real-Time Telemetry & Bridges",
     },
   ];
 
   const currentProject = projectTypes[activeTab];
   const CurrentIcon = currentProject.icon;
+
+  const handlePrev = () => {
+    setActiveTab((prev) => (prev === 0 ? projectTypes.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveTab((prev) => (prev === projectTypes.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <section
@@ -126,395 +149,551 @@ export default function ProjectTypesSection({
       style={{
         padding: "6.5rem 0",
         position: "relative",
-        backgroundColor: "var(--bg-black)",
-        borderTop: "1px solid var(--border-glass)",
-        borderBottom: "1px solid var(--border-glass)",
       }}
     >
       <div className="site-container">
-        {/* Header */}
+        {/* Infosys Header Row: Category Eyebrow on Left, Pagination Controls on Right */}
         <div
           style={{
-            textAlign: "center",
-            maxWidth: "850px",
-            margin: "0 auto 3.5rem auto",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: "1.5rem",
+            marginBottom: "2.5rem",
+            borderBottom: "1px solid var(--border-glass)",
+            paddingBottom: "1.5rem",
           }}
         >
-          <div
-            className="badge-pill orange-pill"
-            style={{ marginBottom: "1rem" }}
-          >
-            <Sparkles size={15} color="var(--orange-400)" />
-            <span>OUR 4 PROJECT SPECIALTIES</span>
+          <div>
+            <div className="infosys-tag">
+              <Sparkles size={16} />
+              <span>TALES OF TRANSFORMATION • TOP STORIES</span>
+            </div>
+            <h2
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontWeight: 800,
+                color: "var(--text-primary)",
+                lineHeight: 1.18,
+              }}
+            >
+              How Enterprises Navigate Their Next{" "}
+              <span className="text-gradient-sky">With VenTek</span>
+            </h2>
           </div>
 
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 4vw, 3.2rem)",
-              fontWeight: 800,
-              marginBottom: "1.2rem",
-            }}
-          >
-            Types of Systems We Engineer For{" "}
-            <span className="text-gradient-fire">Growing Companies</span>
-          </h2>
+          {/* Infosys Signature Top Right Controls: "← 1 / 4 →" */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <span
+              style={{
+                fontSize: "0.95rem",
+                fontWeight: 700,
+                color: "var(--text-secondary)",
+                fontFamily: "var(--font-mono, monospace)",
+              }}
+            >
+              {activeTab + 1} / {projectTypes.length}
+            </span>
+            <div style={{ display: "flex", gap: "0.4rem" }}>
+              <button
+                onClick={handlePrev}
+                aria-label="Previous story"
+                style={{
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "50%",
+                  border: "1px solid var(--border-glass-strong)",
+                  backgroundColor: "var(--bg-surface-1)",
+                  color: "var(--text-primary)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--infosys-blue)";
+                  e.currentTarget.style.color = "var(--infosys-blue)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border-glass-strong)";
+                  e.currentTarget.style.color = "var(--text-primary)";
+                }}
+              >
+                <ChevronLeft size={18} />
+              </button>
 
-          <p
-            style={{
-              fontSize: "1.1rem",
-              color: "var(--text-secondary)",
-              lineHeight: 1.6,
-            }}
-          >
-            Every business is unique. We don&apos;t force one-size-fits-all software onto you.
-            Here are the four primary types of systems we build to solve real operational bottlenecks.
-          </p>
+              <button
+                onClick={handleNext}
+                aria-label="Next story"
+                style={{
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "50%",
+                  border: "1px solid var(--border-glass-strong)",
+                  backgroundColor: "var(--bg-surface-1)",
+                  color: "var(--text-primary)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--infosys-blue)";
+                  e.currentTarget.style.color = "var(--infosys-blue)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border-glass-strong)";
+                  e.currentTarget.style.color = "var(--text-primary)";
+                }}
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* 4 Interactive Selector Tabs */}
+        {/* Category Pill Tabs */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "0.85rem",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "0.6rem",
             marginBottom: "2.5rem",
           }}
         >
-          {projectTypes.map((proj, idx) => {
-            const Icon = proj.icon;
-            const isSelected = activeTab === idx;
+          {projectTypes.map((pt, idx) => {
+            const isActive = activeTab === idx;
             return (
               <button
-                key={proj.id}
+                key={pt.id}
                 onClick={() => setActiveTab(idx)}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                  padding: "1rem 1.25rem",
-                  borderRadius: "var(--radius-md)",
-                  backgroundColor: isSelected
-                    ? "var(--bg-surface-3)"
-                    : "rgba(255, 255, 255, 0.02)",
-                  border: isSelected
-                    ? "1px solid var(--orange-500)"
-                    : "1px solid var(--border-glass)",
-                  color: isSelected ? "#ffffff" : "var(--text-secondary)",
+                  padding: "0.55rem 1.35rem",
+                  borderRadius: "9999px",
+                  fontSize: "0.86rem",
+                  fontWeight: 600,
                   cursor: "pointer",
-                  textAlign: "left",
-                  transition: "all 0.25s ease",
-                  boxShadow: isSelected
-                    ? "0 0 20px rgba(255, 85, 0, 0.2)"
+                  transition: "all 0.2s ease",
+                  backgroundColor: isActive
+                    ? "var(--infosys-blue)"
+                    : "var(--bg-surface-1)",
+                  color: isActive ? "#ffffff" : "var(--text-secondary)",
+                  border: isActive
+                    ? "1px solid var(--infosys-blue)"
+                    : "1px solid var(--border-glass)",
+                  boxShadow: isActive
+                    ? "0 4px 14px rgba(0, 124, 195, 0.3)"
                     : "none",
                 }}
               >
-                <div
-                  style={{
-                    width: "36px",
-                    height: "36px",
-                    borderRadius: "8px",
-                    backgroundColor: isSelected
-                      ? "var(--orange-500)"
-                      : "rgba(255, 255, 255, 0.05)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: isSelected ? "#000000" : "var(--text-muted)",
-                    flexShrink: 0,
-                  }}
-                >
-                  <Icon size={19} />
-                </div>
-                <div style={{ fontSize: "0.95rem", fontWeight: 700 }}>
-                  {proj.title}
-                </div>
+                {pt.title}
               </button>
             );
           })}
         </div>
 
-        {/* Selected Project Deep Dive Card */}
-        <div
-          className="card-glass"
-          style={{
-            padding: "3rem 2.5rem",
-            backgroundColor: "var(--bg-surface-1)",
-            border: "1px solid var(--border-orange)",
-            borderRadius: "var(--radius-xl)",
-            boxShadow: "0 20px 45px rgba(0, 0, 0, 0.7)",
-          }}
-        >
+        {/* ======================================================================== */}
+        {/* INFOSYS SIGNATURE HORIZONTAL SPLIT STORY CARD (Macy's Comp Style)       */}
+        {/* ======================================================================== */}
+        <div className="infosys-story-card" style={{ marginBottom: "2rem" }}>
+          {/* Left Side: Generative 3D Visual Art / Tech Wave Stage */}
           <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
-              gap: "2.5rem",
+              background: currentProject.gradient,
+              padding: "3.5rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              position: "relative",
+              overflow: "hidden",
+              minHeight: "380px",
+              color: "#ffffff",
             }}
           >
-            {/* Left Column: Overview & Deliverables */}
-            <div>
+            {/* Visual Fluid Waves Artwork */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0,
+                backgroundImage: `
+                  radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                  radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.35) 0%, transparent 60%)
+                `,
+                pointerEvents: "none",
+              }}
+            />
+
+            {/* Abstract Decorative Lines */}
+            <svg
+              viewBox="0 0 400 300"
+              style={{
+                position: "absolute",
+                right: "-40px",
+                bottom: "-40px",
+                width: "360px",
+                height: "280px",
+                opacity: 0.22,
+                pointerEvents: "none",
+              }}
+            >
+              <path
+                d="M10 280 C 120 180, 240 320, 380 120 C 440 40, 320 0, 240 80"
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth="12"
+              />
+              <path
+                d="M50 290 C 160 190, 260 280, 390 150"
+                fill="none"
+                stroke="#38bdf8"
+                strokeWidth="6"
+              />
+            </svg>
+
+            <div style={{ position: "relative", zIndex: 1 }}>
               <div
                 style={{
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.85rem",
-                  marginBottom: "1rem",
+                  gap: "0.5rem",
+                  padding: "0.35rem 0.95rem",
+                  borderRadius: "9999px",
+                  background: "rgba(255, 255, 255, 0.15)",
+                  backdropFilter: "blur(10px)",
+                  fontSize: "0.78rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  marginBottom: "1.5rem",
                 }}
               >
-                <div
-                  style={{
-                    width: "44px",
-                    height: "44px",
-                    borderRadius: "12px",
-                    backgroundColor: "var(--orange-subtle)",
-                    border: "1px solid var(--border-orange)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--orange-400)",
-                  }}
-                >
-                  <CurrentIcon size={22} />
-                </div>
-                <div>
-                  <h3
-                    style={{
-                      fontSize: "1.6rem",
-                      fontWeight: 800,
-                      color: "#ffffff",
-                    }}
-                  >
-                    {currentProject.title}
-                  </h3>
-                  <div
-                    style={{
-                      fontSize: "0.9rem",
-                      color: "var(--orange-400)",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {currentProject.subtitle}
-                  </div>
-                </div>
+                <CurrentIcon size={16} />
+                <span>{currentProject.accentTag}</span>
               </div>
 
-              <p
+              <h3
+                style={{
+                  fontSize: "clamp(1.75rem, 3.5vw, 2.4rem)",
+                  fontWeight: 800,
+                  color: "#ffffff",
+                  lineHeight: 1.18,
+                  marginBottom: "0.75rem",
+                }}
+              >
+                {currentProject.caseStudy.company}
+              </h3>
+
+              <div
                 style={{
                   fontSize: "1.05rem",
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.6,
-                  marginBottom: "2rem",
+                  color: "#e2e8f0",
+                  lineHeight: 1.5,
+                  maxWidth: "480px",
                 }}
               >
-                {currentProject.summary}
-              </p>
-
-              <h4
-                style={{
-                  fontSize: "1rem",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                  color: "#ffffff",
-                  marginBottom: "1rem",
-                }}
-              >
-                What We Deliver In This System:
-              </h4>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.85rem",
-                  marginBottom: "2.5rem",
-                }}
-              >
-                {currentProject.deliverables.map((item, dIdx) => (
-                  <div
-                    key={dIdx}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      gap: "0.75rem",
-                      fontSize: "0.95rem",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--orange-subtle)",
-                        border: "1px solid var(--border-orange)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "var(--orange-400)",
-                        flexShrink: 0,
-                        marginTop: "2px",
-                      }}
-                    >
-                      <Check size={12} strokeWidth={3} />
-                    </div>
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  gap: "1.2rem",
-                }}
-              >
-                <button
-                  onClick={() => onOpenAudit(currentProject.title)}
-                  className="btn-primary"
-                  style={{ padding: "0.9rem 1.8rem" }}
-                >
-                  <span>Build This System For My Company</span>
-                  <ArrowRight size={17} />
-                </button>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    color: "var(--text-muted)",
-                    fontSize: "0.875rem",
-                  }}
-                >
-                  <Clock size={16} color="var(--orange-400)" />
-                  <span>Timeline: {currentProject.turnaround}</span>
-                </div>
+                {currentProject.subtitle}
               </div>
             </div>
 
-            {/* Right Column: Real-World Case Study Box */}
+            {/* Bottom Metrics Pills inside Left Media Panel */}
             <div
               style={{
-                backgroundColor: "var(--bg-surface-2)",
-                border: "1px solid var(--border-glass-strong)",
-                borderRadius: "var(--radius-lg)",
-                padding: "2rem",
+                position: "relative",
+                zIndex: 1,
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "0.75rem",
+                marginTop: "2rem",
               }}
             >
-              <div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginBottom: "1.25rem",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "0.75rem",
-                      fontWeight: 800,
-                      fontFamily: "var(--font-mono)",
-                      color: "var(--orange-400)",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    REAL-WORLD CLIENT TRANSFORMATION
-                  </span>
-                  <ShieldCheck size={18} color="var(--orange-400)" />
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "1.15rem",
-                    fontWeight: 700,
-                    color: "#ffffff",
-                    marginBottom: "1.25rem",
-                  }}
-                >
-                  {currentProject.caseStudy.company}
-                </div>
-
-                <div style={{ marginBottom: "1.25rem" }}>
-                  <div
-                    style={{
-                      fontSize: "0.8rem",
-                      fontWeight: 700,
-                      color: "#f87171",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    The Friction:
-                  </div>
-                  <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>
-                    {currentProject.caseStudy.problem}
-                  </p>
-                </div>
-
-                <div style={{ marginBottom: "1.5rem" }}>
-                  <div
-                    style={{
-                      fontSize: "0.8rem",
-                      fontWeight: 700,
-                      color: "var(--orange-400)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                      marginBottom: "0.3rem",
-                    }}
-                  >
-                    The VenTek System:
-                  </div>
-                  <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>
-                    {currentProject.caseStudy.solution}
-                  </p>
-                </div>
-              </div>
-
               <div
                 style={{
-                  padding: "1rem 1.25rem",
-                  borderRadius: "var(--radius-md)",
-                  backgroundColor: "rgba(255, 85, 0, 0.1)",
-                  border: "1px solid rgba(255, 85, 0, 0.3)",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
+                  padding: "0.45rem 1rem",
+                  borderRadius: "9999px",
+                  background: "rgba(255, 255, 255, 0.18)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(255, 255, 255, 0.25)",
+                  fontSize: "0.825rem",
+                  fontWeight: 700,
                 }}
               >
-                <div className="pulse-dot" />
-                <div>
-                  <div
-                    style={{
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "var(--orange-400)",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Verified Business Impact:
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.95rem",
-                      fontWeight: 700,
-                      color: "#ffffff",
-                    }}
-                  >
-                    {currentProject.caseStudy.result}
-                  </div>
-                </div>
+                Turnaround: {currentProject.turnaround}
+              </div>
+              <div
+                style={{
+                  padding: "0.45rem 1rem",
+                  borderRadius: "9999px",
+                  background: "rgba(16, 185, 129, 0.25)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(16, 185, 129, 0.4)",
+                  fontSize: "0.825rem",
+                  fontWeight: 700,
+                  color: "#6ee7b7",
+                }}
+              >
+                {currentProject.caseStudy.result}
               </div>
             </div>
           </div>
+
+          {/* Right Side: Case Study Breakdown & Deliverables */}
+          <div
+            style={{
+              padding: "3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              backgroundColor: "var(--card-bg)",
+            }}
+          >
+            <div>
+              {/* Problem vs Solution Editorial Split */}
+              <div style={{ marginBottom: "1.5rem" }}>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    fontWeight: 800,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    color: "#ef4444",
+                    marginBottom: "0.3rem",
+                  }}
+                >
+                  The Friction
+                </div>
+                <p
+                  style={{
+                    fontSize: "0.925rem",
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {currentProject.caseStudy.problem}
+                </p>
+              </div>
+
+              <div style={{ marginBottom: "1.75rem" }}>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    fontWeight: 800,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.08em",
+                    color: "var(--infosys-blue)",
+                    marginBottom: "0.3rem",
+                  }}
+                >
+                  The VenTek Architecture
+                </div>
+                <p
+                  style={{
+                    fontSize: "0.925rem",
+                    color: "var(--text-primary)",
+                    lineHeight: 1.55,
+                    fontWeight: 500,
+                  }}
+                >
+                  {currentProject.caseStudy.solution}
+                </p>
+              </div>
+
+              {/* What We Deliver */}
+              <div style={{ marginBottom: "2rem" }}>
+                <div
+                  style={{
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    color: "var(--text-muted)",
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  Included Systems & Capabilities:
+                </div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+                    gap: "0.5rem",
+                  }}
+                >
+                  {currentProject.deliverables.map((item, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "0.5rem",
+                        fontSize: "0.85rem",
+                        color: "var(--text-secondary)",
+                      }}
+                    >
+                      <Check
+                        size={15}
+                        color="var(--infosys-blue)"
+                        style={{ flexShrink: 0, marginTop: "2px" }}
+                      />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Action Row */}
+            <div
+              style={{
+                borderTop: "1px solid var(--border-subtle)",
+                paddingTop: "1.5rem",
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "1rem",
+              }}
+            >
+              <button
+                onClick={() => onOpenAudit(currentProject.title)}
+                className="btn-infosys-primary"
+                style={{ padding: "0.75rem 1.8rem" }}
+              >
+                <span>Deploy This System</span>
+                <ArrowUpRight size={16} />
+              </button>
+
+              <button
+                onClick={() => onOpenAudit(currentProject.title)}
+                className="link-know-more"
+                style={{ background: "none", border: "none", padding: 0 }}
+              >
+                <span>Read Full Architecture Spec</span>
+                <ArrowUpRight size={15} className="arrow-icon" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* 3 Secondary Story Cards (Directly matching Infosys layout) */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "1.25rem",
+          }}
+        >
+          {projectTypes
+            .filter((_, idx) => idx !== activeTab)
+            .map((item) => {
+              const ItemIcon = item.icon;
+              const targetIdx = projectTypes.findIndex((p) => p.id === item.id);
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => setActiveTab(targetIdx)}
+                  className="card-glass"
+                  style={{
+                    cursor: "pointer",
+                    padding: "1.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.6rem",
+                        marginBottom: "0.75rem",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "8px",
+                          backgroundColor: "var(--infosys-blue-light)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "var(--infosys-blue)",
+                        }}
+                      >
+                        <ItemIcon size={16} />
+                      </div>
+                      <span
+                        style={{
+                          fontSize: "0.78rem",
+                          fontWeight: 700,
+                          color: "var(--text-muted)",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {item.title}
+                      </span>
+                    </div>
+
+                    <h4
+                      style={{
+                        fontSize: "1.05rem",
+                        fontWeight: 700,
+                        color: "var(--text-primary)",
+                        marginBottom: "0.4rem",
+                      }}
+                    >
+                      {item.caseStudy.company}
+                    </h4>
+
+                    <p
+                      style={{
+                        fontSize: "0.825rem",
+                        color: "var(--text-secondary)",
+                        lineHeight: 1.45,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {item.subtitle}
+                    </p>
+                  </div>
+
+                  <div
+                    style={{
+                      borderTop: "1px solid var(--border-subtle)",
+                      paddingTop: "0.75rem",
+                      marginTop: "1rem",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <span className="link-know-more">
+                      <span>Explore Story</span>
+                      <ArrowUpRight size={13} className="arrow-icon" />
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "0.75rem",
+                        color: "var(--text-muted)",
+                        fontFamily: "var(--font-mono, monospace)",
+                      }}
+                    >
+                      {item.index}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </section>

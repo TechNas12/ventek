@@ -7,8 +7,9 @@ import {
   Code2,
   Rocket,
   CheckCircle2,
-  ArrowRight,
+  ArrowUpRight,
   ShieldCheck,
+  Calendar,
 } from "lucide-react";
 
 interface ProcessSectionProps {
@@ -61,9 +62,6 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
       style={{
         padding: "6.5rem 0",
         position: "relative",
-        backgroundColor: "var(--bg-black)",
-        borderTop: "1px solid var(--border-glass)",
-        borderBottom: "1px solid var(--border-glass)",
       }}
     >
       <div className="site-container">
@@ -71,27 +69,26 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
         <div
           style={{
             textAlign: "center",
-            maxWidth: "800px",
+            maxWidth: "820px",
             margin: "0 auto 4rem auto",
           }}
         >
-          <div
-            className="badge-pill orange-pill"
-            style={{ marginBottom: "1rem" }}
-          >
-            <ShieldCheck size={15} color="var(--orange-400)" />
-            <span>TRANSPARENT 4-STEP ROADMAP</span>
+          <div className="infosys-tag">
+            <ShieldCheck size={16} />
+            <span>IMPLEMENTATION FRAMEWORK • 3-WEEK SPRINT</span>
           </div>
 
           <h2
             style={{
-              fontSize: "clamp(2rem, 4vw, 3.2rem)",
+              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
+              lineHeight: 1.15,
               marginBottom: "1.2rem",
+              color: "var(--text-primary)",
             }}
           >
             How We Take Your Business From{" "}
-            <span className="text-gradient-fire">Manual Chaos to Autopilot</span>
+            <span className="text-gradient-sky">Manual Chaos to Autopilot</span>
           </h2>
 
           <p
@@ -106,13 +103,14 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
           </p>
         </div>
 
-        {/* 4 Steps Grid */}
+        {/* 4 Connected Step Cards (Infosys Strategic Roadmap Grid) */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: "1.5rem",
             marginBottom: "3.5rem",
+            position: "relative",
           }}
         >
           {steps.map((st, idx) => {
@@ -125,13 +123,14 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  padding: "2rem 1.75rem",
-                  backgroundColor: "var(--bg-surface-1)",
-                  border: "1px solid rgba(255, 255, 255, 0.07)",
+                  padding: "2.25rem 1.85rem",
+                  borderRadius: "16px",
                   position: "relative",
+                  overflow: "hidden",
                 }}
               >
                 <div>
+                  {/* Step Top Bar: Icon on Left, Number on Right */}
                   <div
                     style={{
                       display: "flex",
@@ -142,53 +141,58 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                   >
                     <div
                       style={{
-                        width: "48px",
-                        height: "48px",
+                        width: "44px",
+                        height: "44px",
                         borderRadius: "12px",
-                        backgroundColor: "var(--orange-subtle)",
-                        border: "1px solid var(--border-orange)",
+                        backgroundColor: "var(--infosys-blue-light)",
+                        border: "1px solid var(--infosys-blue-border)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        color: "var(--orange-400)",
+                        color: "var(--infosys-blue)",
                       }}
                     >
                       <Icon size={22} />
                     </div>
 
-                    <div
+                    <span
                       style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "0.85rem",
-                        fontWeight: 700,
-                        padding: "0.25rem 0.65rem",
-                        borderRadius: "var(--radius-sm)",
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        color: "var(--text-muted)",
+                        fontSize: "2rem",
+                        fontFamily: "var(--font-mono, monospace)",
+                        fontWeight: 800,
+                        color: "var(--text-dim)",
+                        opacity: 0.35,
                       }}
                     >
-                      {st.timeline}
-                    </div>
+                      {st.step}
+                    </span>
                   </div>
 
+                  {/* Timeline Badge */}
                   <div
                     style={{
-                      fontSize: "0.8rem",
-                      fontWeight: 800,
-                      color: "var(--orange-400)",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      marginBottom: "0.3rem",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      padding: "0.25rem 0.75rem",
+                      borderRadius: "9999px",
+                      backgroundColor: "var(--bg-surface-2)",
+                      border: "1px solid var(--border-subtle)",
+                      fontSize: "0.78rem",
+                      fontWeight: 700,
+                      color: "var(--infosys-blue)",
+                      marginBottom: "1rem",
                     }}
                   >
-                    Step {st.step}
+                    <Calendar size={13} />
+                    <span>{st.timeline}</span>
                   </div>
 
                   <h3
                     style={{
-                      fontSize: "1.25rem",
-                      fontWeight: 700,
-                      color: "#ffffff",
+                      fontSize: "1.2rem",
+                      fontWeight: 800,
+                      color: "var(--text-primary)",
                       marginBottom: "0.85rem",
                       lineHeight: 1.3,
                     }}
@@ -208,29 +212,27 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                   </p>
                 </div>
 
+                {/* Outcome Pill */}
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.75rem",
-                    borderRadius: "var(--radius-sm)",
-                    backgroundColor: "rgba(255, 85, 0, 0.08)",
-                    borderLeft: "3px solid var(--orange-500)",
+                    padding: "0.75rem 1rem",
+                    borderRadius: "8px",
+                    backgroundColor: "var(--infosys-blue-light)",
+                    borderLeft: "3px solid var(--infosys-blue)",
                     fontSize: "0.825rem",
                     fontWeight: 600,
-                    color: "#ffb076",
+                    color: "var(--infosys-blue)",
+                    lineHeight: 1.4,
                   }}
                 >
-                  <CheckCircle2 size={15} color="var(--orange-400)" style={{ flexShrink: 0 }} />
-                  <span>{st.outcome}</span>
+                  {st.outcome}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* Action Prompt */}
+        {/* Bottom CTA Row */}
         <div
           style={{
             textAlign: "center",
@@ -238,11 +240,10 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
         >
           <button
             onClick={onOpenAudit}
-            className="btn-primary btn-lg"
-            style={{ padding: "1rem 2.2rem" }}
+            className="btn-infosys-primary btn-lg"
           >
-            <span>Start Step 1: Book Your 30-Min Discovery Call</span>
-            <ArrowRight size={18} />
+            <span>Book Your Day 1 Strategy Call</span>
+            <ArrowUpRight size={18} />
           </button>
         </div>
       </div>

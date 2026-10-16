@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, HelpCircle, ArrowRight } from "lucide-react";
+import { ChevronDown, HelpCircle, ArrowUpRight, MessageSquare } from "lucide-react";
 
 interface FaqSectionProps {
   onOpenAudit: () => void;
@@ -53,9 +53,6 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
       style={{
         padding: "6.5rem 0",
         position: "relative",
-        backgroundColor: "var(--bg-black)",
-        borderTop: "1px solid var(--border-glass)",
-        borderBottom: "1px solid var(--border-glass)",
       }}
     >
       <div className="site-container">
@@ -67,23 +64,22 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
             margin: "0 auto 3.5rem auto",
           }}
         >
-          <div
-            className="badge-pill orange-pill"
-            style={{ marginBottom: "1rem" }}
-          >
-            <HelpCircle size={15} color="var(--orange-400)" />
-            <span>CLEAR ANSWERS</span>
+          <div className="infosys-tag">
+            <HelpCircle size={16} />
+            <span>KNOWLEDGE & INSIGHTS • CLEAR ANSWERS</span>
           </div>
 
           <h2
             style={{
-              fontSize: "clamp(2rem, 4vw, 3.2rem)",
+              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
+              lineHeight: 1.15,
               marginBottom: "1.2rem",
+              color: "var(--text-primary)",
             }}
           >
             Frequently Asked{" "}
-            <span className="text-gradient-fire">Questions</span>
+            <span className="text-gradient-sky">Questions</span>
           </h2>
 
           <p
@@ -97,14 +93,14 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
           </p>
         </div>
 
-        {/* FAQ Accordion List */}
+        {/* FAQ Accordion List (Infosys Knowledge Architecture Style) */}
         <div
           style={{
-            maxWidth: "850px",
-            margin: "0 auto 3rem auto",
+            maxWidth: "880px",
+            margin: "0 auto 3.5rem auto",
             display: "flex",
             flexDirection: "column",
-            gap: "1rem",
+            gap: "0.85rem",
           }}
         >
           {faqs.map((faq, index) => {
@@ -114,14 +110,17 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
                 key={index}
                 style={{
                   backgroundColor: isOpen
-                    ? "var(--bg-surface-2)"
-                    : "var(--bg-surface-1)",
+                    ? "var(--bg-surface-1)"
+                    : "var(--card-bg)",
                   border: isOpen
-                    ? "1px solid var(--border-orange)"
-                    : "1px solid rgba(255, 255, 255, 0.07)",
-                  borderRadius: "var(--radius-md)",
+                    ? "1px solid var(--infosys-blue)"
+                    : "1px solid var(--border-glass)",
+                  borderRadius: "14px",
                   overflow: "hidden",
                   transition: "all 0.25s ease",
+                  boxShadow: isOpen
+                    ? "0 8px 24px rgba(0, 124, 195, 0.12)"
+                    : "var(--shadow-card)",
                 }}
               >
                 <button
@@ -129,41 +128,57 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
                   onClick={() => toggleFaq(index)}
                   style={{
                     width: "100%",
-                    padding: "1.35rem 1.75rem",
+                    padding: "1.4rem 1.8rem",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "1rem",
+                    gap: "1.2rem",
                     backgroundColor: "transparent",
                     border: "none",
                     cursor: "pointer",
                     textAlign: "left",
-                    color: "#ffffff",
-                    fontSize: "1.05rem",
-                    fontWeight: 700,
+                    color: "var(--text-primary)",
                   }}
                 >
-                  <span>{faq.question}</span>
-                  <div
+                  <span
                     style={{
-                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "transform 0.25s ease",
-                      color: isOpen ? "var(--orange-400)" : "var(--text-muted)",
-                      flexShrink: 0,
+                      fontSize: "1.05rem",
+                      fontWeight: 700,
+                      lineHeight: 1.4,
+                      color: isOpen ? "var(--infosys-blue)" : "var(--text-primary)",
                     }}
                   >
-                    <ChevronDown size={20} />
+                    {faq.question}
+                  </span>
+                  <div
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      backgroundColor: isOpen
+                        ? "var(--infosys-blue-light)"
+                        : "var(--bg-surface-2)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: isOpen ? "var(--infosys-blue)" : "var(--text-muted)",
+                      flexShrink: 0,
+                      transition: "transform 0.3s ease",
+                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  >
+                    <ChevronDown size={18} />
                   </div>
                 </button>
 
                 {isOpen && (
                   <div
                     style={{
-                      padding: "0 1.75rem 1.5rem 1.75rem",
-                      fontSize: "0.95rem",
+                      padding: "0 1.8rem 1.6rem 1.8rem",
                       color: "var(--text-secondary)",
+                      fontSize: "0.95rem",
                       lineHeight: 1.65,
-                      borderTop: "1px solid rgba(255, 255, 255, 0.04)",
+                      borderTop: "1px solid var(--border-subtle)",
                       paddingTop: "1rem",
                     }}
                   >
@@ -175,26 +190,37 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
           })}
         </div>
 
-        {/* Still have questions? */}
+        {/* Bottom Help Callout */}
         <div
           style={{
-            textAlign: "center",
+            maxWidth: "880px",
+            margin: "0 auto",
+            padding: "1.75rem 2rem",
+            borderRadius: "16px",
+            backgroundColor: "var(--bg-surface-1)",
+            border: "1px solid var(--border-glass-strong)",
             display: "flex",
-            flexDirection: "column",
+            flexWrap: "wrap",
             alignItems: "center",
-            gap: "1rem",
+            justifyContent: "space-between",
+            gap: "1.25rem",
           }}
         >
-          <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-            Have a unique question about your company&apos;s specific tools or workflow?
-          </p>
+          <div>
+            <div style={{ fontWeight: 700, color: "var(--text-primary)", fontSize: "1rem" }}>
+              Have a specific question about your business workflow?
+            </div>
+            <div style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
+              Ask directly or schedule an exploratory 1-on-1 session.
+            </div>
+          </div>
+
           <button
             onClick={onOpenAudit}
-            className="btn-secondary"
-            style={{ padding: "0.85rem 1.75rem" }}
+            className="btn-infosys-primary btn-sm"
           >
-            <span>Ask Us Directly on a 15-Minute Call</span>
-            <ArrowRight size={16} color="var(--orange-400)" />
+            <span>Ask VenTek Directly</span>
+            <ArrowUpRight size={15} />
           </button>
         </div>
       </div>

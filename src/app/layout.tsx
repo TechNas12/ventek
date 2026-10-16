@@ -45,13 +45,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('ventek-theme');
+                  if (t) {
+                    document.documentElement.setAttribute('data-theme', t);
+                  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
         />
       </head>
       <body>{children}</body>

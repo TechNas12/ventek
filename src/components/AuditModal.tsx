@@ -5,7 +5,7 @@ import {
   X,
   CheckCircle2,
   Zap,
-  ArrowRight,
+  ArrowUpRight,
   ShieldCheck,
   Clock,
   Sparkles,
@@ -70,9 +70,9 @@ export default function AuditModal({
         right: 0,
         bottom: 0,
         zIndex: 2000,
-        backgroundColor: "rgba(0, 0, 0, 0.85)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        backgroundColor: "rgba(7, 12, 24, 0.75)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -84,12 +84,11 @@ export default function AuditModal({
       <div
         style={{
           width: "100%",
-          maxWidth: "600px",
-          backgroundColor: "var(--bg-surface-1)",
-          border: "1px solid var(--border-orange)",
-          borderRadius: "var(--radius-xl)",
-          boxShadow:
-            "0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 85, 0, 0.25)",
+          maxWidth: "580px",
+          backgroundColor: "var(--card-bg)",
+          border: "1px solid var(--infosys-blue)",
+          borderRadius: "20px",
+          boxShadow: "0 25px 60px rgba(0, 0, 0, 0.35)",
           padding: "2.5rem 2rem",
           position: "relative",
           margin: "auto",
@@ -99,11 +98,12 @@ export default function AuditModal({
         {/* Close button */}
         <button
           onClick={handleResetAndClose}
+          aria-label="Close modal"
           style={{
             position: "absolute",
             top: "1.25rem",
             right: "1.25rem",
-            background: "rgba(255, 255, 255, 0.05)",
+            background: "var(--bg-surface-2)",
             border: "1px solid var(--border-glass)",
             borderRadius: "50%",
             width: "36px",
@@ -113,6 +113,15 @@ export default function AuditModal({
             justifyContent: "center",
             color: "var(--text-secondary)",
             cursor: "pointer",
+            transition: "all 0.2s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "var(--infosys-blue)";
+            e.currentTarget.style.borderColor = "var(--infosys-blue)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "var(--text-secondary)";
+            e.currentTarget.style.borderColor = "var(--border-glass)";
           }}
         >
           <X size={18} />
@@ -131,7 +140,6 @@ export default function AuditModal({
                 alignItems: "center",
                 justifyContent: "center",
                 margin: "0 auto 1.5rem auto",
-                boxShadow: "0 0 25px rgba(16, 185, 129, 0.4)",
               }}
             >
               <CheckCircle2 size={36} color="#10b981" />
@@ -141,11 +149,11 @@ export default function AuditModal({
               style={{
                 fontSize: "1.75rem",
                 fontWeight: 800,
-                color: "#ffffff",
+                color: "var(--text-primary)",
                 marginBottom: "0.75rem",
               }}
             >
-              Tech Audit Booked Successfully!
+              Consultation Request Received!
             </h3>
 
             <p
@@ -156,19 +164,19 @@ export default function AuditModal({
                 marginBottom: "2rem",
               }}
             >
-              Thank you, <strong style={{ color: "#ffffff" }}>{name}</strong>.
+              Thank you, <strong style={{ color: "var(--text-primary)" }}>{name}</strong>.
               We have received your request for{" "}
-              <strong style={{ color: "var(--orange-400)" }}>
+              <strong style={{ color: "var(--infosys-blue)" }}>
                 {company || "your business"}
               </strong>
               . Our engineering lead will review your requirements and email you at{" "}
-              <strong style={{ color: "#ffffff" }}>{email}</strong> within 2 hours
+              <strong style={{ color: "var(--text-primary)" }}>{email}</strong> within 2 hours
               with your preliminary blueprint and calendar link.
             </p>
 
             <button
               onClick={handleResetAndClose}
-              className="btn-primary"
+              className="btn-infosys-primary"
               style={{ width: "100%", padding: "0.95rem" }}
             >
               <span>Back to VenTek Homepage</span>
@@ -177,19 +185,7 @@ export default function AuditModal({
         ) : (
           <div>
             <div style={{ marginBottom: "1.5rem" }}>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontSize: "0.8rem",
-                  fontWeight: 700,
-                  color: "var(--orange-400)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  marginBottom: "0.3rem",
-                }}
-              >
+              <div className="infosys-tag" style={{ marginBottom: "0.5rem" }}>
                 <Zap size={15} />
                 <span>Zero Risk • 100% Free Consultation</span>
               </div>
@@ -197,11 +193,11 @@ export default function AuditModal({
                 style={{
                   fontSize: "1.65rem",
                   fontWeight: 800,
-                  color: "#ffffff",
+                  color: "var(--text-primary)",
                   lineHeight: 1.2,
                 }}
               >
-                Book Your 30-Minute Tech & AI Audit
+                Contact Us
               </h3>
               <p
                 style={{
@@ -247,10 +243,10 @@ export default function AuditModal({
                     style={{
                       width: "100%",
                       padding: "0.75rem 0.9rem",
-                      borderRadius: "var(--radius-sm)",
-                      backgroundColor: "var(--bg-black)",
+                      borderRadius: "8px",
+                      backgroundColor: "var(--bg-surface-2)",
                       border: "1px solid var(--border-glass-strong)",
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                       fontSize: "0.9rem",
                     }}
                   />
@@ -277,10 +273,10 @@ export default function AuditModal({
                     style={{
                       width: "100%",
                       padding: "0.75rem 0.9rem",
-                      borderRadius: "var(--radius-sm)",
-                      backgroundColor: "var(--bg-black)",
+                      borderRadius: "8px",
+                      backgroundColor: "var(--bg-surface-2)",
                       border: "1px solid var(--border-glass-strong)",
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                       fontSize: "0.9rem",
                     }}
                   />
@@ -315,10 +311,10 @@ export default function AuditModal({
                     style={{
                       width: "100%",
                       padding: "0.75rem 0.9rem",
-                      borderRadius: "var(--radius-sm)",
-                      backgroundColor: "var(--bg-black)",
+                      borderRadius: "8px",
+                      backgroundColor: "var(--bg-surface-2)",
                       border: "1px solid var(--border-glass-strong)",
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                       fontSize: "0.9rem",
                     }}
                   />
@@ -344,10 +340,10 @@ export default function AuditModal({
                     style={{
                       width: "100%",
                       padding: "0.75rem 0.9rem",
-                      borderRadius: "var(--radius-sm)",
-                      backgroundColor: "var(--bg-black)",
+                      borderRadius: "8px",
+                      backgroundColor: "var(--bg-surface-2)",
                       border: "1px solid var(--border-glass-strong)",
-                      color: "#ffffff",
+                      color: "var(--text-primary)",
                       fontSize: "0.9rem",
                     }}
                   />
@@ -382,15 +378,15 @@ export default function AuditModal({
                         type="button"
                         onClick={() => toggleNeed(need)}
                         style={{
-                          padding: "0.4rem 0.8rem",
-                          borderRadius: "var(--radius-pill)",
+                          padding: "0.4rem 0.85rem",
+                          borderRadius: "9999px",
                           backgroundColor: isSelected
-                            ? "var(--orange-500)"
-                            : "rgba(255, 255, 255, 0.05)",
+                            ? "var(--infosys-blue)"
+                            : "var(--bg-surface-2)",
                           border: isSelected
-                            ? "1px solid var(--orange-400)"
+                            ? "1px solid var(--infosys-blue)"
                             : "1px solid var(--border-glass)",
-                          color: isSelected ? "#000000" : "var(--text-secondary)",
+                          color: isSelected ? "#ffffff" : "var(--text-secondary)",
                           fontSize: "0.8rem",
                           fontWeight: 600,
                           cursor: "pointer",
@@ -425,10 +421,10 @@ export default function AuditModal({
                   style={{
                     width: "100%",
                     padding: "0.75rem 0.9rem",
-                    borderRadius: "var(--radius-sm)",
-                    backgroundColor: "var(--bg-black)",
+                    borderRadius: "8px",
+                    backgroundColor: "var(--bg-surface-2)",
                     border: "1px solid var(--border-glass-strong)",
-                    color: "#ffffff",
+                    color: "var(--text-primary)",
                     fontSize: "0.9rem",
                     resize: "none",
                   }}
@@ -438,7 +434,7 @@ export default function AuditModal({
               {/* Submit CTA */}
               <button
                 type="submit"
-                className="btn-primary"
+                className="btn-infosys-primary"
                 style={{
                   width: "100%",
                   padding: "0.95rem",
@@ -446,8 +442,8 @@ export default function AuditModal({
                   fontSize: "1rem",
                 }}
               >
-                <span>Confirm Free Audit Request</span>
-                <ArrowRight size={18} />
+                <span>Contact Us</span>
+                <ArrowUpRight size={18} />
               </button>
 
               <div
@@ -461,7 +457,7 @@ export default function AuditModal({
                   marginTop: "0.2rem",
                 }}
               >
-                <ShieldCheck size={14} color="var(--orange-400)" />
+                <ShieldCheck size={14} color="var(--infosys-blue)" />
                 <span>Zero sales pressure. Your information is 100% confidential.</span>
               </div>
             </form>
