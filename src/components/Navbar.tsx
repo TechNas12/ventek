@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Zap, Menu, X, ArrowUpRight, ArrowRight, ShieldCheck, Search } from "lucide-react";
+import { Zap, Menu, X, ArrowUpRight, ShieldCheck } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
@@ -44,7 +44,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           borderBottom: scrolled
             ? "1px solid var(--border-glass)"
             : "1px solid transparent",
-          padding: scrolled ? "0.75rem 0" : "1.25rem 0",
+          padding: scrolled ? "0.65rem 0" : "1.1rem 0",
         }}
       >
         <div
@@ -56,14 +56,15 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           }}
         >
           {/* Left Group: Circular Hamburger Menu & Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
             {/* Circular Infosys Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
+              className="navbar-hamburger"
               style={{
-                width: "42px",
-                height: "42px",
+                width: "38px",
+                height: "38px",
                 borderRadius: "50%",
                 backgroundColor: "var(--bg-surface-1)",
                 border: "1px solid var(--border-glass-strong)",
@@ -84,7 +85,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                 e.currentTarget.style.color = "var(--text-primary)";
               }}
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
 
             {/* Brand Logo (Infosys Minimal Wordmark Style) */}
@@ -93,14 +94,14 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "0.6rem",
+                gap: "0.5rem",
                 textDecoration: "none",
               }}
             >
               <div
                 style={{
-                  width: "30px",
-                  height: "30px",
+                  width: "28px",
+                  height: "28px",
                   borderRadius: "8px",
                   background: "var(--infosys-blue)",
                   display: "flex",
@@ -109,11 +110,11 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                   color: "#ffffff",
                 }}
               >
-                <Zap size={18} strokeWidth={2.5} />
+                <Zap size={16} strokeWidth={2.5} />
               </div>
               <div
                 style={{
-                  fontSize: "1.45rem",
+                  fontSize: "1.35rem",
                   fontWeight: 800,
                   letterSpacing: "-0.04em",
                   color: "var(--text-primary)",
@@ -165,28 +166,38 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           </nav>
 
           {/* Right Group: Theme Toggle & Infosys Capsule Button */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
             <ThemeToggle />
 
             {/* Infosys Capsule CTA Button (e.g. "Ask VenTek" / "Contact Us ↗") */}
             <button
               onClick={onOpenAudit}
-              className="btn-infosys-dark btn-sm"
+              className="btn-infosys-dark btn-sm header-cta-pill"
               style={{
                 borderRadius: "9999px",
-                padding: "0.55rem 1.35rem",
-                fontSize: "0.86rem",
+                fontSize: "0.825rem",
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.45rem",
+                gap: "0.4rem",
               }}
             >
-              <Zap size={14} color="var(--sky-400)" />
-              <span>Contact Us</span>
-              <ArrowUpRight size={15} />
+              <Zap size={13} color="var(--sky-400)" />
+              <span className="header-cta-text">Contact Us</span>
+              <ArrowUpRight size={14} />
             </button>
           </div>
         </div>
+
+        <style jsx>{`
+          @media (max-width: 640px) {
+            .header-cta-pill {
+              padding: 0.45rem 0.85rem !important;
+            }
+            .header-cta-text {
+              display: none;
+            }
+          }
+        `}</style>
       </header>
 
       {/* Enterprise Drawer / Overlay Menu */}
@@ -194,7 +205,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
         <div
           style={{
             position: "fixed",
-            top: "74px",
+            top: "64px",
             left: 0,
             right: 0,
             bottom: 0,
@@ -202,7 +213,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
             zIndex: 999,
-            padding: "2.5rem 1.5rem",
+            padding: "2rem 1.25rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -213,12 +224,12 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
           <div>
             <div
               style={{
-                fontSize: "0.75rem",
+                fontSize: "0.72rem",
                 fontWeight: 700,
                 color: "var(--infosys-blue)",
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                marginBottom: "1.25rem",
+                marginBottom: "1rem",
               }}
             >
               Navigation
@@ -227,7 +238,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.5rem",
+                gap: "0.25rem",
               }}
             >
               {navLinks.map((link) => (
@@ -236,10 +247,10 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
-                    fontSize: "1.2rem",
+                    fontSize: "1.1rem",
                     fontWeight: 700,
                     color: "var(--text-primary)",
-                    padding: "0.85rem 0",
+                    padding: "0.8rem 0",
                     borderBottom: "1px solid var(--border-glass)",
                     display: "flex",
                     alignItems: "center",
@@ -247,7 +258,7 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                   }}
                 >
                   <span>{link.label}</span>
-                  <ArrowUpRight size={18} color="var(--infosys-blue)" />
+                  <ArrowUpRight size={17} color="var(--infosys-blue)" />
                 </a>
               ))}
             </div>
@@ -257,8 +268,8 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "1rem",
-              paddingTop: "2.5rem",
+              gap: "0.85rem",
+              paddingTop: "2rem",
             }}
           >
             <button
@@ -267,23 +278,23 @@ export default function Navbar({ onOpenAudit }: NavbarProps) {
                 onOpenAudit();
               }}
               className="btn-infosys-primary"
-              style={{ width: "100%", padding: "1rem" }}
+              style={{ width: "100%", padding: "0.9rem" }}
             >
               <span>Contact Us</span>
-              <ArrowUpRight size={18} />
+              <ArrowUpRight size={17} />
             </button>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "0.5rem",
+                gap: "0.45rem",
                 color: "var(--text-muted)",
-                fontSize: "0.825rem",
+                fontSize: "0.8rem",
                 textAlign: "center",
               }}
             >
-              <ShieldCheck size={16} color="var(--infosys-blue)" />
+              <ShieldCheck size={15} color="var(--infosys-blue)" />
               <span>Direct engineer consultation • Zero obligations</span>
             </div>
           </div>

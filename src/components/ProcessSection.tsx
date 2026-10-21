@@ -6,7 +6,6 @@ import {
   Compass,
   Code2,
   Rocket,
-  CheckCircle2,
   ArrowUpRight,
   ShieldCheck,
   Calendar,
@@ -57,34 +56,29 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
   ];
 
   return (
-    <section
-      id="process"
-      style={{
-        padding: "6.5rem 0",
-        position: "relative",
-      }}
-    >
+    <section id="process" className="section-wrapper process-section-root">
       <div className="site-container">
         {/* Header */}
         <div
           style={{
             textAlign: "center",
             maxWidth: "820px",
-            margin: "0 auto 4rem auto",
+            margin: "0 auto 3rem auto",
           }}
         >
           <div className="infosys-tag">
-            <ShieldCheck size={16} />
+            <ShieldCheck size={15} />
             <span>IMPLEMENTATION FRAMEWORK • 3-WEEK SPRINT</span>
           </div>
 
           <h2
+            className="process-main-title"
             style={{
-              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
-              lineHeight: 1.15,
-              marginBottom: "1.2rem",
+              lineHeight: 1.18,
+              marginBottom: "1rem",
               color: "var(--text-primary)",
+              textWrap: "balance",
             }}
           >
             How We Take Your Business From{" "}
@@ -92,10 +86,11 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
           </h2>
 
           <p
+            className="process-subtext"
             style={{
-              fontSize: "1.1rem",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
+              textWrap: "pretty",
             }}
           >
             You don&apos;t need technical knowledge or weeks of boring meetings.
@@ -107,9 +102,9 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1.5rem",
-            marginBottom: "3.5rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
+            gap: "1.25rem",
+            marginBottom: "3rem",
             position: "relative",
           }}
         >
@@ -123,7 +118,6 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  padding: "2.25rem 1.85rem",
                   borderRadius: "16px",
                   position: "relative",
                   overflow: "hidden",
@@ -136,14 +130,14 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      marginBottom: "1.5rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
                     <div
                       style={{
-                        width: "44px",
-                        height: "44px",
-                        borderRadius: "12px",
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "10px",
                         backgroundColor: "var(--infosys-blue-light)",
                         border: "1px solid var(--infosys-blue-border)",
                         display: "flex",
@@ -152,12 +146,12 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                         color: "var(--infosys-blue)",
                       }}
                     >
-                      <Icon size={22} />
+                      <Icon size={20} />
                     </div>
 
                     <span
                       style={{
-                        fontSize: "2rem",
+                        fontSize: "1.65rem",
                         fontFamily: "var(--font-mono, monospace)",
                         fontWeight: 800,
                         color: "var(--text-dim)",
@@ -174,14 +168,14 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "0.4rem",
-                      padding: "0.25rem 0.75rem",
+                      padding: "0.25rem 0.7rem",
                       borderRadius: "9999px",
                       backgroundColor: "var(--bg-surface-2)",
                       border: "1px solid var(--border-subtle)",
-                      fontSize: "0.78rem",
+                      fontSize: "0.75rem",
                       fontWeight: 700,
                       color: "var(--infosys-blue)",
-                      marginBottom: "1rem",
+                      marginBottom: "0.85rem",
                     }}
                   >
                     <Calendar size={13} />
@@ -190,10 +184,10 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
 
                   <h3
                     style={{
-                      fontSize: "1.2rem",
+                      fontSize: "1.15rem",
                       fontWeight: 800,
                       color: "var(--text-primary)",
-                      marginBottom: "0.85rem",
+                      marginBottom: "0.65rem",
                       lineHeight: 1.3,
                     }}
                   >
@@ -202,10 +196,10 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
 
                   <p
                     style={{
-                      fontSize: "0.925rem",
+                      fontSize: "0.88rem",
                       color: "var(--text-secondary)",
                       lineHeight: 1.55,
-                      marginBottom: "1.5rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
                     {st.description}
@@ -215,11 +209,11 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
                 {/* Outcome Pill */}
                 <div
                   style={{
-                    padding: "0.75rem 1rem",
+                    padding: "0.65rem 0.9rem",
                     borderRadius: "8px",
                     backgroundColor: "var(--infosys-blue-light)",
                     borderLeft: "3px solid var(--infosys-blue)",
-                    fontSize: "0.825rem",
+                    fontSize: "0.8rem",
                     fontWeight: 600,
                     color: "var(--infosys-blue)",
                     lineHeight: 1.4,
@@ -233,20 +227,40 @@ export default function ProcessSection({ onOpenAudit }: ProcessSectionProps) {
         </div>
 
         {/* Bottom CTA Row */}
-        <div
-          style={{
-            textAlign: "center",
-          }}
-        >
+        <div style={{ textAlign: "center" }}>
           <button
             onClick={onOpenAudit}
-            className="btn-infosys-primary btn-lg"
+            className="btn-infosys-primary btn-lg process-bottom-btn"
           >
             <span>Book Your Day 1 Strategy Call</span>
-            <ArrowUpRight size={18} />
+            <ArrowUpRight size={17} />
           </button>
         </div>
       </div>
+
+      <style jsx>{`
+        .process-main-title {
+          font-size: clamp(1.9rem, 4vw, 3rem);
+        }
+
+        .process-subtext {
+          font-size: 1.05rem;
+        }
+
+        @media (max-width: 768px) {
+          .process-main-title {
+            font-size: clamp(1.55rem, 5.5vw, 2.1rem) !important;
+          }
+
+          .process-subtext {
+            font-size: 0.925rem !important;
+          }
+
+          .process-bottom-btn {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

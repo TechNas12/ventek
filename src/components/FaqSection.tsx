@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, HelpCircle, ArrowUpRight, MessageSquare } from "lucide-react";
+import { ChevronDown, HelpCircle, ArrowUpRight } from "lucide-react";
 
 interface FaqSectionProps {
   onOpenAudit: () => void;
@@ -48,34 +48,29 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
   };
 
   return (
-    <section
-      id="faq"
-      style={{
-        padding: "6.5rem 0",
-        position: "relative",
-      }}
-    >
+    <section id="faq" className="section-wrapper faq-section-root">
       <div className="site-container">
         {/* Header */}
         <div
           style={{
             textAlign: "center",
             maxWidth: "800px",
-            margin: "0 auto 3.5rem auto",
+            margin: "0 auto 3rem auto",
           }}
         >
           <div className="infosys-tag">
-            <HelpCircle size={16} />
+            <HelpCircle size={15} />
             <span>KNOWLEDGE & INSIGHTS • CLEAR ANSWERS</span>
           </div>
 
           <h2
+            className="faq-main-title"
             style={{
-              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
-              lineHeight: 1.15,
-              marginBottom: "1.2rem",
+              lineHeight: 1.18,
+              marginBottom: "1rem",
               color: "var(--text-primary)",
+              textWrap: "balance",
             }}
           >
             Frequently Asked{" "}
@@ -83,10 +78,11 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
           </h2>
 
           <p
+            className="faq-subtext"
             style={{
-              fontSize: "1.1rem",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
+              textWrap: "pretty",
             }}
           >
             Straight answers to real business questions. No technical jargon, no vague promises.
@@ -97,10 +93,10 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
         <div
           style={{
             maxWidth: "880px",
-            margin: "0 auto 3.5rem auto",
+            margin: "0 auto 2.5rem auto",
             display: "flex",
             flexDirection: "column",
-            gap: "0.85rem",
+            gap: "0.75rem",
           }}
         >
           {faqs.map((faq, index) => {
@@ -126,13 +122,13 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
                 <button
                   type="button"
                   onClick={() => toggleFaq(index)}
+                  className="faq-accordion-btn"
                   style={{
                     width: "100%",
-                    padding: "1.4rem 1.8rem",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "1.2rem",
+                    gap: "1rem",
                     backgroundColor: "transparent",
                     border: "none",
                     cursor: "pointer",
@@ -141,8 +137,8 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
                   }}
                 >
                   <span
+                    className="faq-question-text"
                     style={{
-                      fontSize: "1.05rem",
                       fontWeight: 700,
                       lineHeight: 1.4,
                       color: isOpen ? "var(--infosys-blue)" : "var(--text-primary)",
@@ -152,8 +148,8 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
                   </span>
                   <div
                     style={{
-                      width: "32px",
-                      height: "32px",
+                      width: "30px",
+                      height: "30px",
                       borderRadius: "50%",
                       backgroundColor: isOpen
                         ? "var(--infosys-blue-light)"
@@ -167,21 +163,12 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
                       transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                     }}
                   >
-                    <ChevronDown size={18} />
+                    <ChevronDown size={16} />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div
-                    style={{
-                      padding: "0 1.8rem 1.6rem 1.8rem",
-                      color: "var(--text-secondary)",
-                      fontSize: "0.95rem",
-                      lineHeight: 1.65,
-                      borderTop: "1px solid var(--border-subtle)",
-                      paddingTop: "1rem",
-                    }}
-                  >
+                  <div className="faq-answer-body">
                     {faq.answer}
                   </div>
                 )}
@@ -191,39 +178,100 @@ export default function FaqSection({ onOpenAudit }: FaqSectionProps) {
         </div>
 
         {/* Bottom Help Callout */}
-        <div
-          style={{
-            maxWidth: "880px",
-            margin: "0 auto",
-            padding: "1.75rem 2rem",
-            borderRadius: "16px",
-            backgroundColor: "var(--bg-surface-1)",
-            border: "1px solid var(--border-glass-strong)",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1.25rem",
-          }}
-        >
+        <div className="faq-bottom-callout">
           <div>
-            <div style={{ fontWeight: 700, color: "var(--text-primary)", fontSize: "1rem" }}>
+            <div style={{ fontWeight: 700, color: "var(--text-primary)", fontSize: "0.95rem" }}>
               Have a specific question about your business workflow?
             </div>
-            <div style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
+            <div style={{ color: "var(--text-secondary)", fontSize: "0.85rem", marginTop: "0.15rem" }}>
               Ask directly or schedule an exploratory 1-on-1 session.
             </div>
           </div>
 
           <button
             onClick={onOpenAudit}
-            className="btn-infosys-primary btn-sm"
+            className="btn-infosys-primary btn-sm faq-callout-btn"
           >
             <span>Ask VenTek Directly</span>
-            <ArrowUpRight size={15} />
+            <ArrowUpRight size={14} />
           </button>
         </div>
       </div>
+
+      <style jsx>{`
+        .faq-main-title {
+          font-size: clamp(1.9rem, 4vw, 3rem);
+        }
+
+        .faq-subtext {
+          font-size: 1.05rem;
+        }
+
+        .faq-accordion-btn {
+          padding: 1.35rem 1.75rem;
+        }
+
+        .faq-question-text {
+          font-size: 1.05rem;
+        }
+
+        .faq-answer-body {
+          padding: 0 1.75rem 1.5rem 1.75rem;
+          color: var(--text-secondary);
+          font-size: 0.95rem;
+          line-height: 1.65;
+          border-top: 1px solid var(--border-subtle);
+          padding-top: 0.95rem;
+        }
+
+        .faq-bottom-callout {
+          max-width: 880px;
+          margin: 0 auto;
+          padding: 1.5rem 1.85rem;
+          border-radius: 16px;
+          background-color: var(--bg-surface-1);
+          border: 1px solid var(--border-glass-strong);
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justifyContent: space-between;
+          gap: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+          .faq-main-title {
+            font-size: clamp(1.55rem, 5.5vw, 2.1rem) !important;
+          }
+
+          .faq-subtext {
+            font-size: 0.925rem !important;
+          }
+
+          .faq-accordion-btn {
+            padding: 1.1rem 1.15rem !important;
+          }
+
+          .faq-question-text {
+            font-size: 0.95rem !important;
+          }
+
+          .faq-answer-body {
+            padding: 0 1.15rem 1.15rem 1.15rem !important;
+            font-size: 0.88rem !important;
+            line-height: 1.55 !important;
+          }
+
+          .faq-bottom-callout {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            padding: 1.25rem 1.15rem !important;
+          }
+
+          .faq-callout-btn {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

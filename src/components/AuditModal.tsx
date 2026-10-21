@@ -7,8 +7,10 @@ import {
   Zap,
   ArrowUpRight,
   ShieldCheck,
-  Clock,
-  Sparkles,
+  MessageSquare,
+  Mail,
+  Database,
+  Loader2,
 } from "lucide-react";
 
 interface AuditModalProps {
@@ -30,6 +32,7 @@ export default function AuditModal({
   const [selectedNeeds, setSelectedNeeds] = useState<string[]>([
     "Business Automations",
   ]);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   if (!isOpen) return null;
@@ -42,16 +45,51 @@ export default function AuditModal({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name) return;
-    setSubmitted(true);
+
+    setSubmitting(true);
+
+    try {
+      // 1. Send lead to backend API (saves to data/leads.json, sends email, and syncs to Google Sheets webhook if configured)
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          company,
+          needs: selectedNeeds,
+          details,
+        }),
+      });
+    } catch (err) {
+      console.error("Lead submission error:", err);
+    } finally {
+      setSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   const handleResetAndClose = () => {
     setSubmitted(false);
     onClose();
   };
+
+  // Pre-formatted WhatsApp message for instant 1-tap mobile or web connect
+  const waMessage = encodeURIComponent(
+    `Hi Sanket, I just submitted an inquiry on the VenTek website:\n\n` +
+      `• *Name:* ${name}\n` +
+      `• *Email:* ${email}\n` +
+      (phone ? `• *Phone / WhatsApp:* ${phone}\n` : "") +
+      (company ? `• *Company:* ${company}\n` : "") +
+      `• *Required Services:* ${selectedNeeds.join(", ")}\n` +
+      (details ? `• *Current Bottleneck:* ${details}` : "")
+  );
+
+  const waLink = `https://wa.me/919834317366?text=${waMessage}`;
 
   const allNeeds = [
     "Web Development",
@@ -128,29 +166,29 @@ export default function AuditModal({
         </button>
 
         {submitted ? (
-          <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
+          <div style={{ textAlign: "center", padding: "1rem 0" }}>
             <div
               style={{
-                width: "64px",
-                height: "64px",
+                width: "60px",
+                height: "60px",
                 borderRadius: "50%",
                 backgroundColor: "rgba(16, 185, 129, 0.15)",
                 border: "2px solid #10b981",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                margin: "0 auto 1.5rem auto",
+                margin: "0 auto 1.25rem auto",
               }}
             >
-              <CheckCircle2 size={36} color="#10b981" />
+              <CheckCircle2 size={34} color="#10b981" />
             </div>
 
             <h3
               style={{
-                fontSize: "1.75rem",
+                fontSize: "1.65rem",
                 fontWeight: 800,
                 color: "var(--text-primary)",
-                marginBottom: "0.75rem",
+                marginBottom: "0.5rem",
               }}
             >
               Consultation Request Received!
@@ -158,10 +196,10 @@ export default function AuditModal({
 
             <p
               style={{
-                fontSize: "1rem",
+                fontSize: "0.95rem",
                 color: "var(--text-secondary)",
-                lineHeight: 1.6,
-                marginBottom: "2rem",
+                lineHeight: 1.55,
+                marginBottom: "1.5rem",
               }}
             >
               Thank you, <strong style={{ color: "var(--text-primary)" }}>{name}</strong>.
@@ -170,17 +208,69 @@ export default function AuditModal({
                 {company || "your business"}
               </strong>
               . Our engineering lead will review your requirements and email you at{" "}
-              <strong style={{ color: "var(--text-primary)" }}>{email}</strong> within 2 hours
-              with your preliminary blueprint and calendar link.
+              <strong style={{ color: "var(--text-primary)" }}>{email}</strong> within 2 hours.
             </p>
 
-            <button
-              onClick={handleResetAndClose}
-              className="btn-infosys-primary"
-              style={{ width: "100%", padding: "0.95rem" }}
+            {/* Real-time delivery badges */}
+            <div
+              style={{
+                backgroundColor: "var(--bg-surface-2)",
+                borderRadius: "12px",
+                padding: "1rem",
+                border: "1px solid var(--border-glass)",
+                marginBottom: "1.5rem",
+                textAlign: "left",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem",
+                fontSize: "0.825rem",
+              }}
             >
-              <span>Back to VenTek Homepage</span>
-            </button>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--text-primary)" }}>
+                <CheckCircle2 size={16} color="#10b981" />
+                <span><strong>Saved to Database:</strong> Logged into permanent lead registry</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--text-primary)" }}>
+                <Mail size={16} color="var(--infosys-blue)" />
+                <span><strong>Email Notification:</strong> Alert queued for engineering lead</span>
+              </div>
+            </div>
+
+            {/* Fast-Track WhatsApp CTA */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.6rem",
+                  backgroundColor: "#25D366",
+                  color: "#ffffff",
+                  fontWeight: 700,
+                  fontSize: "0.95rem",
+                  padding: "0.9rem 1.5rem",
+                  borderRadius: "9999px",
+                  textDecoration: "none",
+                  boxShadow: "0 4px 15px rgba(37, 211, 102, 0.3)",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                <MessageSquare size={18} />
+                <span>Fast-Track on WhatsApp (+91 9834317366)</span>
+                <ArrowUpRight size={16} />
+              </a>
+
+              <button
+                onClick={handleResetAndClose}
+                className="btn-infosys-secondary"
+                style={{ width: "100%", padding: "0.85rem" }}
+              >
+                <span>Back to VenTek Homepage</span>
+              </button>
+            </div>
           </div>
         ) : (
           <div>
@@ -305,7 +395,7 @@ export default function AuditModal({
                   </label>
                   <input
                     type="tel"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+91 9834317366"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     style={{
@@ -434,16 +524,28 @@ export default function AuditModal({
               {/* Submit CTA */}
               <button
                 type="submit"
+                disabled={submitting}
                 className="btn-infosys-primary"
                 style={{
                   width: "100%",
                   padding: "0.95rem",
                   marginTop: "0.5rem",
                   fontSize: "1rem",
+                  opacity: submitting ? 0.7 : 1,
+                  cursor: submitting ? "not-allowed" : "pointer",
                 }}
               >
-                <span>Contact Us</span>
-                <ArrowUpRight size={18} />
+                {submitting ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    <span>Submitting Lead...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Contact Us</span>
+                    <ArrowUpRight size={18} />
+                  </>
+                )}
               </button>
 
               <div

@@ -9,8 +9,6 @@ import {
   ArrowUpRight,
   ShieldAlert,
   CheckCircle2,
-  AlertCircle,
-  Zap,
 } from "lucide-react";
 
 interface ProblemsSectionProps {
@@ -54,12 +52,7 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
   ];
 
   return (
-    <section
-      style={{
-        padding: "6.5rem 0",
-        position: "relative",
-      }}
-    >
+    <section className="section-wrapper problems-section-root">
       <div className="site-container">
         {/* Section Eyebrow & Header */}
         <div
@@ -69,21 +62,22 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
             alignItems: "center",
             textAlign: "center",
             maxWidth: "850px",
-            margin: "0 auto 3.5rem auto",
+            margin: "0 auto 3rem auto",
           }}
         >
           <div className="infosys-tag">
-            <ShieldAlert size={16} />
+            <ShieldAlert size={15} />
             <span>THE REALITY CHECK • WHY BUSINESSES GET STUCK</span>
           </div>
 
           <h2
+            className="problems-main-title"
             style={{
-              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
-              lineHeight: 1.15,
-              marginBottom: "1.25rem",
+              lineHeight: 1.18,
+              marginBottom: "1rem",
               color: "var(--text-primary)",
+              textWrap: "balance",
             }}
           >
             Is Your Business Working For You...{" "}
@@ -93,11 +87,12 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
           </h2>
 
           <p
+            className="problems-subtext"
             style={{
-              fontSize: "1.1rem",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
               maxWidth: "750px",
+              textWrap: "pretty",
             }}
           >
             Every day without the right technology, your company leaks time, money, and valuable clients.
@@ -109,9 +104,9 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "1.5rem",
-            marginBottom: "3.5rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 270px), 1fr))",
+            gap: "1.25rem",
+            marginBottom: "3rem",
           }}
         >
           {problems.map((prob, idx) => {
@@ -124,7 +119,6 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  padding: "2rem",
                   borderRadius: "16px",
                   border: "1px solid var(--card-border)",
                   position: "relative",
@@ -136,11 +130,11 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                   style={{
                     position: "absolute",
                     top: "1.25rem",
-                    right: "1.5rem",
-                    fontSize: "1.5rem",
+                    right: "1.25rem",
+                    fontSize: "1.35rem",
                     fontWeight: 800,
                     color: "var(--text-dim)",
-                    opacity: 0.4,
+                    opacity: 0.35,
                     fontFamily: "var(--font-mono, monospace)",
                   }}
                 >
@@ -150,8 +144,8 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                 <div>
                   <div
                     style={{
-                      width: "44px",
-                      height: "44px",
+                      width: "40px",
+                      height: "40px",
                       borderRadius: "10px",
                       backgroundColor: "rgba(239, 68, 68, 0.08)",
                       border: "1px solid rgba(239, 68, 68, 0.2)",
@@ -159,18 +153,18 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                       alignItems: "center",
                       justifyContent: "center",
                       color: "#ef4444",
-                      marginBottom: "1.5rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
-                    <IconComp size={22} />
+                    <IconComp size={20} />
                   </div>
 
                   <h3
                     style={{
-                      fontSize: "1.2rem",
+                      fontSize: "1.15rem",
                       fontWeight: 700,
                       color: "var(--text-primary)",
-                      marginBottom: "0.85rem",
+                      marginBottom: "0.75rem",
                       lineHeight: 1.3,
                     }}
                   >
@@ -179,10 +173,10 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
 
                   <p
                     style={{
-                      fontSize: "0.925rem",
+                      fontSize: "0.88rem",
                       color: "var(--text-secondary)",
                       lineHeight: 1.55,
-                      marginBottom: "1.5rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
                     {prob.description}
@@ -192,11 +186,11 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                 {/* Quantitative Impact Indicator */}
                 <div
                   style={{
-                    padding: "0.75rem 1rem",
+                    padding: "0.65rem 0.9rem",
                     borderRadius: "8px",
                     backgroundColor: "rgba(239, 68, 68, 0.06)",
                     borderLeft: "3px solid #ef4444",
-                    fontSize: "0.825rem",
+                    fontSize: "0.8rem",
                     fontWeight: 600,
                     color: "#ef4444",
                     lineHeight: 1.4,
@@ -213,11 +207,11 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
         {/* SIGNATURE INFOSYS "CRAFTING INTELLIGENT EXPERIENCES" CALLOUT BANNER     */}
         {/* ======================================================================== */}
         <div
+          className="commitment-callout-card"
           style={{
             borderRadius: "20px",
             background: "linear-gradient(135deg, #091222 0%, #0d1e3d 60%, #10264f 100%)",
             color: "#ffffff",
-            padding: "3.5rem 2.5rem",
             position: "relative",
             overflow: "hidden",
             boxShadow: "0 15px 35px rgba(9, 18, 34, 0.35)",
@@ -246,23 +240,24 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
                 gap: "0.45rem",
                 color: "#7dd3fc",
                 fontWeight: 700,
-                fontSize: "0.82rem",
+                fontSize: "0.78rem",
                 textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                marginBottom: "0.85rem",
+                letterSpacing: "0.08em",
+                marginBottom: "0.75rem",
               }}
             >
-              <CheckCircle2 size={16} color="#38bdf8" />
+              <CheckCircle2 size={15} color="#38bdf8" />
               <span>THE VENTEK COMMITMENT</span>
             </div>
 
             <h3
+              className="commitment-title"
               style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
                 fontWeight: 800,
                 color: "#ffffff",
                 lineHeight: 1.2,
-                marginBottom: "1rem",
+                marginBottom: "0.85rem",
+                textWrap: "balance",
               }}
             >
               You don&apos;t need to become a programmer.{" "}
@@ -270,12 +265,12 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
             </h3>
 
             <p
+              className="commitment-subtext"
               style={{
                 color: "#cbd5e1",
-                fontSize: "1.05rem",
                 lineHeight: 1.6,
                 maxWidth: "700px",
-                margin: "0 auto 2rem auto",
+                margin: "0 auto 1.75rem auto",
               }}
             >
               In a free 30-minute discovery chat, we inspect your current business workflow, pinpoint
@@ -290,11 +285,56 @@ export default function ProblemsSection({ onOpenAudit }: ProblemsSectionProps) {
               }}
             >
               <span>Contact Us</span>
-              <ArrowUpRight size={18} />
+              <ArrowUpRight size={17} />
             </button>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .problems-main-title {
+          font-size: clamp(1.9rem, 4vw, 3rem);
+        }
+
+        .problems-subtext {
+          font-size: 1.05rem;
+        }
+
+        .commitment-callout-card {
+          padding: 3.5rem 2.5rem;
+        }
+
+        .commitment-title {
+          font-size: clamp(1.65rem, 3.5vw, 2.4rem);
+        }
+
+        .commitment-subtext {
+          font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+          .problems-main-title {
+            font-size: clamp(1.55rem, 5.5vw, 2.1rem) !important;
+          }
+
+          .problems-subtext {
+            font-size: 0.925rem !important;
+          }
+
+          .commitment-callout-card {
+            padding: 2.25rem 1.25rem !important;
+            border-radius: 16px !important;
+          }
+
+          .commitment-title {
+            font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+          }
+
+          .commitment-subtext {
+            font-size: 0.88rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -8,7 +8,6 @@ import {
   Layers,
   CheckCircle2,
   ArrowUpRight,
-  Sparkles,
   LayoutGrid,
 } from "lucide-react";
 
@@ -99,34 +98,29 @@ export default function FourPillarsSection({
   ];
 
   return (
-    <section
-      id="services"
-      style={{
-        padding: "6.5rem 0",
-        position: "relative",
-      }}
-    >
+    <section id="services" className="section-wrapper four-pillars-root">
       <div className="site-container">
         {/* Section Header */}
         <div
           style={{
             textAlign: "center",
             maxWidth: "850px",
-            margin: "0 auto 3.5rem auto",
+            margin: "0 auto 3rem auto",
           }}
         >
           <div className="infosys-tag">
-            <LayoutGrid size={16} />
+            <LayoutGrid size={15} />
             <span>ENTERPRISE CAPABILITIES • WHAT WE BUILD</span>
           </div>
 
           <h2
+            className="pillars-main-title"
             style={{
-              fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
               fontWeight: 800,
-              lineHeight: 1.15,
-              marginBottom: "1.2rem",
+              lineHeight: 1.18,
+              marginBottom: "1rem",
               color: "var(--text-primary)",
+              textWrap: "balance",
             }}
           >
             What We Build:{" "}
@@ -134,10 +128,11 @@ export default function FourPillarsSection({
           </h2>
 
           <p
+            className="pillars-subtext"
             style={{
-              fontSize: "1.1rem",
               color: "var(--text-secondary)",
               lineHeight: 1.6,
+              textWrap: "pretty",
             }}
           >
             Our technology architecture is organized into four interconnected quadrants — from the front-office systems that acquire and engage your customers, to the back-office engines that automate and power your business.
@@ -149,22 +144,14 @@ export default function FourPillarsSection({
           {quadrants.map((q) => {
             const IconComp = q.icon;
             return (
-              <div
-                key={q.id}
-                className="matrix-quadrant-card"
-                style={{
-                  position: "relative",
-                  borderRadius: "20px",
-                  padding: "2.5rem 2.2rem",
-                }}
-              >
+              <div key={q.id} className="matrix-quadrant-card">
                 {/* Watermark Number */}
                 <div
+                  className="quadrant-watermark-num"
                   style={{
                     position: "absolute",
                     top: "1.25rem",
-                    right: "1.75rem",
-                    fontSize: "3rem",
+                    right: "1.5rem",
                     fontFamily: "var(--font-mono, monospace)",
                     fontWeight: 800,
                     color: "var(--text-dim)",
@@ -181,20 +168,20 @@ export default function FourPillarsSection({
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.75rem",
-                      marginBottom: "1.25rem",
+                      gap: "0.6rem",
+                      marginBottom: "1.15rem",
                     }}
                   >
                     <span
                       style={{
-                        padding: "0.25rem 0.75rem",
+                        padding: "0.25rem 0.7rem",
                         borderRadius: "9999px",
                         backgroundColor: "var(--infosys-blue-light)",
                         border: "1px solid var(--infosys-blue-border)",
-                        fontSize: "0.75rem",
+                        fontSize: "0.72rem",
                         fontWeight: 700,
                         color: "var(--infosys-blue)",
-                        letterSpacing: "0.06em",
+                        letterSpacing: "0.05em",
                       }}
                     >
                       {q.quadrant}
@@ -202,10 +189,10 @@ export default function FourPillarsSection({
 
                     <span
                       style={{
-                        fontSize: "0.72rem",
+                        fontSize: "0.68rem",
                         color: "var(--text-muted)",
                         fontWeight: 600,
-                        letterSpacing: "0.06em",
+                        letterSpacing: "0.05em",
                         textTransform: "uppercase",
                       }}
                     >
@@ -218,15 +205,15 @@ export default function FourPillarsSection({
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "1rem",
-                      marginBottom: "0.75rem",
+                      gap: "0.85rem",
+                      marginBottom: "0.65rem",
                     }}
                   >
                     <div
                       style={{
-                        width: "46px",
-                        height: "46px",
-                        borderRadius: "12px",
+                        width: "42px",
+                        height: "42px",
+                        borderRadius: "10px",
                         backgroundColor: "var(--infosys-blue-light)",
                         border: "1px solid var(--infosys-blue-border)",
                         display: "flex",
@@ -236,13 +223,13 @@ export default function FourPillarsSection({
                         flexShrink: 0,
                       }}
                     >
-                      <IconComp size={24} />
+                      <IconComp size={22} />
                     </div>
 
                     <div>
                       <h3
                         style={{
-                          fontSize: "1.35rem",
+                          fontSize: "1.25rem",
                           fontWeight: 800,
                           color: "var(--text-primary)",
                           lineHeight: 1.25,
@@ -252,10 +239,10 @@ export default function FourPillarsSection({
                       </h3>
                       <div
                         style={{
-                          fontSize: "0.85rem",
+                          fontSize: "0.825rem",
                           fontWeight: 600,
                           color: "var(--infosys-blue)",
-                          marginTop: "0.2rem",
+                          marginTop: "0.15rem",
                         }}
                       >
                         {q.tagline}
@@ -266,11 +253,11 @@ export default function FourPillarsSection({
                   {/* Description */}
                   <p
                     style={{
-                      fontSize: "0.925rem",
+                      fontSize: "0.88rem",
                       color: "var(--text-secondary)",
-                      lineHeight: 1.6,
-                      marginTop: "1rem",
-                      marginBottom: "1.5rem",
+                      lineHeight: 1.55,
+                      marginTop: "0.85rem",
+                      marginBottom: "1.25rem",
                     }}
                   >
                     {q.description}
@@ -281,8 +268,8 @@ export default function FourPillarsSection({
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "0.65rem",
-                      marginBottom: "1.75rem",
+                      gap: "0.55rem",
+                      marginBottom: "1.5rem",
                     }}
                   >
                     {q.benefits.map((b, i) => (
@@ -291,14 +278,14 @@ export default function FourPillarsSection({
                         style={{
                           display: "flex",
                           alignItems: "flex-start",
-                          gap: "0.6rem",
-                          fontSize: "0.875rem",
+                          gap: "0.5rem",
+                          fontSize: "0.84rem",
                           color: "var(--text-secondary)",
                           lineHeight: 1.45,
                         }}
                       >
                         <CheckCircle2
-                          size={16}
+                          size={15}
                           color="var(--infosys-blue)"
                           style={{ flexShrink: 0, marginTop: "2px" }}
                         />
@@ -310,23 +297,24 @@ export default function FourPillarsSection({
 
                 {/* Footer Action & Metric */}
                 <div
+                  className="quadrant-footer-row"
                   style={{
                     borderTop: "1px solid var(--border-subtle)",
-                    paddingTop: "1.25rem",
+                    paddingTop: "1.15rem",
                     display: "flex",
                     flexWrap: "wrap",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "1rem",
+                    gap: "0.75rem",
                   }}
                 >
                   <div
                     style={{
-                      padding: "0.35rem 0.85rem",
+                      padding: "0.3rem 0.75rem",
                       borderRadius: "9999px",
                       backgroundColor: "var(--bg-surface-2)",
                       border: "1px solid var(--border-subtle)",
-                      fontSize: "0.78rem",
+                      fontSize: "0.75rem",
                       fontWeight: 600,
                       color: "var(--infosys-blue)",
                     }}
@@ -336,15 +324,10 @@ export default function FourPillarsSection({
 
                   <button
                     onClick={() => onOpenAudit(q.title)}
-                    className="btn-infosys-primary btn-sm"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.4rem",
-                    }}
+                    className="btn-infosys-primary btn-sm quadrant-action-btn"
                   >
                     <span>{q.ctaText}</span>
-                    <ArrowUpRight size={15} />
+                    <ArrowUpRight size={14} />
                   </button>
                 </div>
               </div>
@@ -352,6 +335,43 @@ export default function FourPillarsSection({
           })}
         </div>
       </div>
+
+      <style jsx>{`
+        .pillars-main-title {
+          font-size: clamp(1.9rem, 4vw, 3rem);
+        }
+
+        .pillars-subtext {
+          font-size: 1.05rem;
+        }
+
+        .quadrant-watermark-num {
+          font-size: 3rem;
+        }
+
+        @media (max-width: 768px) {
+          .pillars-main-title {
+            font-size: clamp(1.55rem, 5.5vw, 2.1rem) !important;
+          }
+
+          .pillars-subtext {
+            font-size: 0.925rem !important;
+          }
+
+          .quadrant-watermark-num {
+            font-size: 2.2rem !important;
+          }
+
+          .quadrant-footer-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+
+          .quadrant-action-btn {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -12,8 +12,8 @@
   --bg-surface-2: #edf2f7;
   --bg-surface-3: #e2e8f0;
   --bg-surface-hover: #e1ebf5;
-  --nav-bg: rgba(255, 255, 255, 0.88);
-  --nav-pill-bg: rgba(240, 244, 250, 0.85);
+  --nav-bg: rgba(255, 255, 255, 0.92);
+  --nav-pill-bg: rgba(240, 244, 250, 0.9);
 
   /* Infosys Corporate Blue & Highlights */
   --infosys-blue: #007cc3;
@@ -70,8 +70,8 @@
   --bg-surface-2: #121824;
   --bg-surface-3: #1a2333;
   --bg-surface-hover: #222e42;
-  --nav-bg: rgba(6, 9, 14, 0.88);
-  --nav-pill-bg: rgba(18, 24, 36, 0.75);
+  --nav-bg: rgba(6, 9, 14, 0.92);
+  --nav-pill-bg: rgba(18, 24, 36, 0.85);
 
   /* Infosys Glowing Blue */
   --infosys-blue: #007cc3;
@@ -154,12 +154,14 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   color: var(--text-primary);
   line-height: 1.15;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
   font-weight: 700;
+  text-wrap: balance;
 }
 
 p {
   color: var(--text-secondary);
+  text-wrap: pretty;
 }
 
 a {
@@ -199,8 +201,22 @@ a {
 
 @media (max-width: 768px) {
   .site-container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Responsive Section Spacing */
+.section-wrapper {
+  padding-top: 6.5rem;
+  padding-bottom: 6.5rem;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .section-wrapper {
+    padding-top: 3.75rem !important;
+    padding-bottom: 3.75rem !important;
   }
 }
 
@@ -208,18 +224,17 @@ a {
 /* 3. INFOSYS CAPSULE BUTTONS & INTERACTIVE ELEMENTS                         */
 /* ======================================================================== */
 
-/* Infosys Signature Pill Primary Button */
 .btn-primary,
 .btn-infosys-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   background: #007cc3;
   color: #ffffff !important;
   font-weight: 600;
   font-size: 0.925rem;
-  padding: 0.75rem 1.75rem;
+  padding: 0.75rem 1.65rem;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
@@ -241,17 +256,16 @@ a {
   transform: translateY(0);
 }
 
-/* Infosys Dark Pill Button (like "Ask Leon" / "I'm Curious ↗") */
 .btn-infosys-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   background: #111827;
   color: #ffffff !important;
   font-weight: 600;
-  font-size: 0.925rem;
-  padding: 0.75rem 1.75rem;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.45rem;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
@@ -267,18 +281,17 @@ a {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Infosys Secondary Outline Pill Button */
 .btn-secondary,
 .btn-infosys-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   background: var(--bg-surface-1);
   color: var(--text-primary);
   font-weight: 600;
   font-size: 0.925rem;
-  padding: 0.75rem 1.65rem;
+  padding: 0.75rem 1.6rem;
   border-radius: 9999px;
   border: 1px solid var(--border-glass-strong);
   cursor: pointer;
@@ -295,21 +308,27 @@ a {
 }
 
 .btn-sm {
-  padding: 0.5rem 1.25rem;
-  font-size: 0.85rem;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.825rem;
 }
 
 .btn-lg {
-  padding: 0.95rem 2.2rem;
-  font-size: 1.05rem;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
 }
 
-/* Infosys Underlined "Know More ↗" Link Style */
+@media (max-width: 640px) {
+  .btn-lg {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.925rem;
+  }
+}
+
 .link-know-more {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: underline;
@@ -337,22 +356,30 @@ a {
 .infosys-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
+  gap: 0.45rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--infosys-blue);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .infosys-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
 }
 
 .badge-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.95rem;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 9999px;
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 600;
   background: var(--bg-surface-2);
   border: 1px solid var(--border-glass);
@@ -383,7 +410,6 @@ a {
 /* 5. INFOSYS CARDS & HORIZONTAL SPLIT CONTAINERS                           */
 /* ======================================================================== */
 
-/* Standard Enterprise Card */
 .card-glass {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -400,16 +426,24 @@ a {
   box-shadow: var(--shadow-hover);
 }
 
+@media (max-width: 768px) {
+  .card-glass {
+    padding: 1.35rem 1.15rem;
+    border-radius: 14px;
+  }
+}
+
 /* 2x2 Matrix Grid */
 .matrix-2x2-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 860px) {
   .matrix-2x2-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
   }
 }
 
@@ -431,6 +465,13 @@ a {
   border-color: var(--card-border-hover);
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
+}
+
+@media (max-width: 768px) {
+  .matrix-quadrant-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 14px;
+  }
 }
 
 /* Infosys Horizontal Split Story Card (Macy's / Top Stories style) */
@@ -456,6 +497,12 @@ a {
   box-shadow: var(--shadow-hover);
 }
 
+@media (max-width: 768px) {
+  .infosys-story-card {
+    border-radius: 16px;
+  }
+}
+
 /* Infosys Hero Floating Insights Strip Cards */
 .hero-insight-cards-grid {
   display: grid;
@@ -466,6 +513,7 @@ a {
 @media (max-width: 640px) {
   .hero-insight-cards-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
@@ -496,6 +544,13 @@ a {
   box-shadow: 0 14px 30px rgba(0, 124, 195, 0.2);
 }
 
+@media (max-width: 640px) {
+  .hero-insight-card {
+    padding: 1.15rem 1.15rem;
+    min-height: auto;
+  }
+}
+
 /* ======================================================================== */
 /* 6. NAVIGATION UTILITIES (INFOSYS STYLE)                                   */
 /* ======================================================================== */
@@ -519,8 +574,8 @@ a {
   background: var(--bg-surface-2);
   border: 1px solid var(--border-glass);
   border-radius: 9999px;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   color: var(--text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -545,12 +600,8 @@ a {
 
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
-  .btn-primary, .btn-secondary, .btn-infosys-primary, .btn-infosys-dark {
+  .btn-primary, .btn-secondary, .btn-infosys-primary {
     width: 100%;
     text-align: center;
-  }
-  
-  .card-glass, .matrix-quadrant-card {
-    padding: 1.5rem;
   }
 }

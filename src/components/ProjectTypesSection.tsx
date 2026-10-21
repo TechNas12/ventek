@@ -8,12 +8,9 @@ import {
   GitFork,
   Check,
   ArrowUpRight,
-  ShieldCheck,
-  Clock,
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  CheckCircle2,
 } from "lucide-react";
 
 interface ProjectTypesSectionProps {
@@ -144,38 +141,34 @@ export default function ProjectTypesSection({
   };
 
   return (
-    <section
-      id="projects"
-      style={{
-        padding: "6.5rem 0",
-        position: "relative",
-      }}
-    >
+    <section id="projects" className="section-wrapper project-types-root">
       <div className="site-container">
         {/* Infosys Header Row: Category Eyebrow on Left, Pagination Controls on Right */}
         <div
+          className="stories-top-header"
           style={{
             display: "flex",
             flexWrap: "wrap",
             alignItems: "flex-end",
             justifyContent: "space-between",
-            gap: "1.5rem",
-            marginBottom: "2.5rem",
+            gap: "1.25rem",
+            marginBottom: "2rem",
             borderBottom: "1px solid var(--border-glass)",
-            paddingBottom: "1.5rem",
+            paddingBottom: "1.25rem",
           }}
         >
           <div>
             <div className="infosys-tag">
-              <Sparkles size={16} />
+              <Sparkles size={15} />
               <span>TALES OF TRANSFORMATION • TOP STORIES</span>
             </div>
             <h2
+              className="stories-main-title"
               style={{
-                fontSize: "clamp(2rem, 4vw, 3rem)",
                 fontWeight: 800,
                 color: "var(--text-primary)",
                 lineHeight: 1.18,
+                textWrap: "balance",
               }}
             >
               How Enterprises Navigate Their Next{" "}
@@ -184,10 +177,10 @@ export default function ProjectTypesSection({
           </div>
 
           {/* Infosys Signature Top Right Controls: "← 1 / 4 →" */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
             <span
               style={{
-                fontSize: "0.95rem",
+                fontSize: "0.88rem",
                 fontWeight: 700,
                 color: "var(--text-secondary)",
                 fontFamily: "var(--font-mono, monospace)",
@@ -200,8 +193,8 @@ export default function ProjectTypesSection({
                 onClick={handlePrev}
                 aria-label="Previous story"
                 style={{
-                  width: "38px",
-                  height: "38px",
+                  width: "36px",
+                  height: "36px",
                   borderRadius: "50%",
                   border: "1px solid var(--border-glass-strong)",
                   backgroundColor: "var(--bg-surface-1)",
@@ -221,15 +214,15 @@ export default function ProjectTypesSection({
                   e.currentTarget.style.color = "var(--text-primary)";
                 }}
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft size={16} />
               </button>
 
               <button
                 onClick={handleNext}
                 aria-label="Next story"
                 style={{
-                  width: "38px",
-                  height: "38px",
+                  width: "36px",
+                  height: "36px",
                   borderRadius: "50%",
                   border: "1px solid var(--border-glass-strong)",
                   backgroundColor: "var(--bg-surface-1)",
@@ -249,31 +242,23 @@ export default function ProjectTypesSection({
                   e.currentTarget.style.color = "var(--text-primary)";
                 }}
               >
-                <ChevronRight size={18} />
+                <ChevronRight size={16} />
               </button>
             </div>
           </div>
         </div>
 
         {/* Category Pill Tabs */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "0.6rem",
-            marginBottom: "2.5rem",
-          }}
-        >
+        <div className="stories-category-tabs">
           {projectTypes.map((pt, idx) => {
             const isActive = activeTab === idx;
             return (
               <button
                 key={pt.id}
                 onClick={() => setActiveTab(idx)}
+                className={`category-tab-btn ${isActive ? "active" : ""}`}
                 style={{
-                  padding: "0.55rem 1.35rem",
                   borderRadius: "9999px",
-                  fontSize: "0.86rem",
                   fontWeight: 600,
                   cursor: "pointer",
                   transition: "all 0.2s ease",
@@ -287,6 +272,7 @@ export default function ProjectTypesSection({
                   boxShadow: isActive
                     ? "0 4px 14px rgba(0, 124, 195, 0.3)"
                     : "none",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {pt.title}
@@ -296,20 +282,19 @@ export default function ProjectTypesSection({
         </div>
 
         {/* ======================================================================== */}
-        {/* INFOSYS SIGNATURE HORIZONTAL SPLIT STORY CARD (Macy's Comp Style)       */}
+        {/* INFOSYS SIGNATURE HORIZONTAL SPLIT STORY CARD                           */}
         {/* ======================================================================== */}
-        <div className="infosys-story-card" style={{ marginBottom: "2rem" }}>
+        <div className="infosys-story-card" style={{ marginBottom: "1.75rem" }}>
           {/* Left Side: Generative 3D Visual Art / Tech Wave Stage */}
           <div
+            className="story-left-media"
             style={{
               background: currentProject.gradient,
-              padding: "3.5rem 2.5rem",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
               position: "relative",
               overflow: "hidden",
-              minHeight: "380px",
               color: "#ffffff",
             }}
           >
@@ -329,69 +314,42 @@ export default function ProjectTypesSection({
               }}
             />
 
-            {/* Abstract Decorative Lines */}
-            <svg
-              viewBox="0 0 400 300"
-              style={{
-                position: "absolute",
-                right: "-40px",
-                bottom: "-40px",
-                width: "360px",
-                height: "280px",
-                opacity: 0.22,
-                pointerEvents: "none",
-              }}
-            >
-              <path
-                d="M10 280 C 120 180, 240 320, 380 120 C 440 40, 320 0, 240 80"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="12"
-              />
-              <path
-                d="M50 290 C 160 190, 260 280, 390 150"
-                fill="none"
-                stroke="#38bdf8"
-                strokeWidth="6"
-              />
-            </svg>
-
             <div style={{ position: "relative", zIndex: 1 }}>
               <div
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "0.5rem",
-                  padding: "0.35rem 0.95rem",
+                  gap: "0.45rem",
+                  padding: "0.3rem 0.85rem",
                   borderRadius: "9999px",
                   background: "rgba(255, 255, 255, 0.15)",
                   backdropFilter: "blur(10px)",
-                  fontSize: "0.78rem",
+                  fontSize: "0.74rem",
                   fontWeight: 700,
-                  letterSpacing: "0.06em",
+                  letterSpacing: "0.05em",
                   textTransform: "uppercase",
-                  marginBottom: "1.5rem",
+                  marginBottom: "1.25rem",
                 }}
               >
-                <CurrentIcon size={16} />
+                <CurrentIcon size={15} />
                 <span>{currentProject.accentTag}</span>
               </div>
 
               <h3
+                className="story-company-name"
                 style={{
-                  fontSize: "clamp(1.75rem, 3.5vw, 2.4rem)",
                   fontWeight: 800,
                   color: "#ffffff",
-                  lineHeight: 1.18,
-                  marginBottom: "0.75rem",
+                  lineHeight: 1.2,
+                  marginBottom: "0.65rem",
                 }}
               >
                 {currentProject.caseStudy.company}
               </h3>
 
               <div
+                className="story-subtitle-text"
                 style={{
-                  fontSize: "1.05rem",
                   color: "#e2e8f0",
                   lineHeight: 1.5,
                   maxWidth: "480px",
@@ -403,23 +361,24 @@ export default function ProjectTypesSection({
 
             {/* Bottom Metrics Pills inside Left Media Panel */}
             <div
+              className="story-badges-row"
               style={{
                 position: "relative",
                 zIndex: 1,
                 display: "flex",
                 flexWrap: "wrap",
-                gap: "0.75rem",
-                marginTop: "2rem",
+                gap: "0.65rem",
+                marginTop: "1.75rem",
               }}
             >
               <div
                 style={{
-                  padding: "0.45rem 1rem",
+                  padding: "0.4rem 0.85rem",
                   borderRadius: "9999px",
                   background: "rgba(255, 255, 255, 0.18)",
                   backdropFilter: "blur(12px)",
                   border: "1px solid rgba(255, 255, 255, 0.25)",
-                  fontSize: "0.825rem",
+                  fontSize: "0.78rem",
                   fontWeight: 700,
                 }}
               >
@@ -427,12 +386,12 @@ export default function ProjectTypesSection({
               </div>
               <div
                 style={{
-                  padding: "0.45rem 1rem",
+                  padding: "0.4rem 0.85rem",
                   borderRadius: "9999px",
                   background: "rgba(16, 185, 129, 0.25)",
                   backdropFilter: "blur(12px)",
                   border: "1px solid rgba(16, 185, 129, 0.4)",
-                  fontSize: "0.825rem",
+                  fontSize: "0.78rem",
                   fontWeight: 700,
                   color: "#6ee7b7",
                 }}
@@ -444,8 +403,8 @@ export default function ProjectTypesSection({
 
           {/* Right Side: Case Study Breakdown & Deliverables */}
           <div
+            className="story-right-editorial"
             style={{
-              padding: "3rem 2.5rem",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
@@ -454,22 +413,22 @@ export default function ProjectTypesSection({
           >
             <div>
               {/* Problem vs Solution Editorial Split */}
-              <div style={{ marginBottom: "1.5rem" }}>
+              <div style={{ marginBottom: "1.25rem" }}>
                 <div
                   style={{
-                    fontSize: "0.75rem",
+                    fontSize: "0.72rem",
                     fontWeight: 800,
                     textTransform: "uppercase",
                     letterSpacing: "0.08em",
                     color: "#ef4444",
-                    marginBottom: "0.3rem",
+                    marginBottom: "0.25rem",
                   }}
                 >
                   The Friction
                 </div>
                 <p
                   style={{
-                    fontSize: "0.925rem",
+                    fontSize: "0.88rem",
                     color: "var(--text-secondary)",
                     lineHeight: 1.55,
                   }}
@@ -478,22 +437,22 @@ export default function ProjectTypesSection({
                 </p>
               </div>
 
-              <div style={{ marginBottom: "1.75rem" }}>
+              <div style={{ marginBottom: "1.5rem" }}>
                 <div
                   style={{
-                    fontSize: "0.75rem",
+                    fontSize: "0.72rem",
                     fontWeight: 800,
                     textTransform: "uppercase",
                     letterSpacing: "0.08em",
                     color: "var(--infosys-blue)",
-                    marginBottom: "0.3rem",
+                    marginBottom: "0.25rem",
                   }}
                 >
                   The VenTek Architecture
                 </div>
                 <p
                   style={{
-                    fontSize: "0.925rem",
+                    fontSize: "0.88rem",
                     color: "var(--text-primary)",
                     lineHeight: 1.55,
                     fontWeight: 500,
@@ -504,39 +463,33 @@ export default function ProjectTypesSection({
               </div>
 
               {/* What We Deliver */}
-              <div style={{ marginBottom: "2rem" }}>
+              <div style={{ marginBottom: "1.75rem" }}>
                 <div
                   style={{
-                    fontSize: "0.78rem",
+                    fontSize: "0.75rem",
                     fontWeight: 700,
                     textTransform: "uppercase",
                     letterSpacing: "0.06em",
                     color: "var(--text-muted)",
-                    marginBottom: "0.75rem",
+                    marginBottom: "0.65rem",
                   }}
                 >
                   Included Systems & Capabilities:
                 </div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-                    gap: "0.5rem",
-                  }}
-                >
+                <div className="deliverables-grid">
                   {currentProject.deliverables.map((item, i) => (
                     <div
                       key={i}
                       style={{
                         display: "flex",
                         alignItems: "flex-start",
-                        gap: "0.5rem",
-                        fontSize: "0.85rem",
+                        gap: "0.45rem",
+                        fontSize: "0.825rem",
                         color: "var(--text-secondary)",
                       }}
                     >
                       <Check
-                        size={15}
+                        size={14}
                         color="var(--infosys-blue)"
                         style={{ flexShrink: 0, marginTop: "2px" }}
                       />
@@ -549,23 +502,24 @@ export default function ProjectTypesSection({
 
             {/* Action Row */}
             <div
+              className="story-action-row"
               style={{
                 borderTop: "1px solid var(--border-subtle)",
-                paddingTop: "1.5rem",
+                paddingTop: "1.25rem",
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
                 justifyContent: "space-between",
-                gap: "1rem",
+                gap: "0.85rem",
               }}
             >
               <button
                 onClick={() => onOpenAudit(currentProject.title)}
-                className="btn-infosys-primary"
-                style={{ padding: "0.75rem 1.8rem" }}
+                className="btn-infosys-primary story-deploy-btn"
+                style={{ padding: "0.7rem 1.6rem" }}
               >
                 <span>Deploy This System</span>
-                <ArrowUpRight size={16} />
+                <ArrowUpRight size={15} />
               </button>
 
               <button
@@ -574,18 +528,18 @@ export default function ProjectTypesSection({
                 style={{ background: "none", border: "none", padding: 0 }}
               >
                 <span>Read Full Architecture Spec</span>
-                <ArrowUpRight size={15} className="arrow-icon" />
+                <ArrowUpRight size={14} className="arrow-icon" />
               </button>
             </div>
           </div>
         </div>
 
-        {/* 3 Secondary Story Cards (Directly matching Infosys layout) */}
+        {/* 3 Secondary Story Cards */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "1.25rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
+            gap: "1rem",
           }}
         >
           {projectTypes
@@ -600,7 +554,6 @@ export default function ProjectTypesSection({
                   className="card-glass"
                   style={{
                     cursor: "pointer",
-                    padding: "1.5rem",
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
@@ -611,14 +564,14 @@ export default function ProjectTypesSection({
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "0.6rem",
-                        marginBottom: "0.75rem",
+                        gap: "0.55rem",
+                        marginBottom: "0.65rem",
                       }}
                     >
                       <div
                         style={{
-                          width: "32px",
-                          height: "32px",
+                          width: "30px",
+                          height: "30px",
                           borderRadius: "8px",
                           backgroundColor: "var(--infosys-blue-light)",
                           display: "flex",
@@ -627,11 +580,11 @@ export default function ProjectTypesSection({
                           color: "var(--infosys-blue)",
                         }}
                       >
-                        <ItemIcon size={16} />
+                        <ItemIcon size={15} />
                       </div>
                       <span
                         style={{
-                          fontSize: "0.78rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                           color: "var(--text-muted)",
                           textTransform: "uppercase",
@@ -643,10 +596,10 @@ export default function ProjectTypesSection({
 
                     <h4
                       style={{
-                        fontSize: "1.05rem",
+                        fontSize: "1rem",
                         fontWeight: 700,
                         color: "var(--text-primary)",
-                        marginBottom: "0.4rem",
+                        marginBottom: "0.35rem",
                       }}
                     >
                       {item.caseStudy.company}
@@ -654,7 +607,7 @@ export default function ProjectTypesSection({
 
                     <p
                       style={{
-                        fontSize: "0.825rem",
+                        fontSize: "0.8rem",
                         color: "var(--text-secondary)",
                         lineHeight: 1.45,
                         display: "-webkit-box",
@@ -670,8 +623,8 @@ export default function ProjectTypesSection({
                   <div
                     style={{
                       borderTop: "1px solid var(--border-subtle)",
-                      paddingTop: "0.75rem",
-                      marginTop: "1rem",
+                      paddingTop: "0.65rem",
+                      marginTop: "0.85rem",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
@@ -683,7 +636,7 @@ export default function ProjectTypesSection({
                     </span>
                     <span
                       style={{
-                        fontSize: "0.75rem",
+                        fontSize: "0.72rem",
                         color: "var(--text-muted)",
                         fontFamily: "var(--font-mono, monospace)",
                       }}
@@ -696,6 +649,102 @@ export default function ProjectTypesSection({
             })}
         </div>
       </div>
+
+      <style jsx>{`
+        .stories-main-title {
+          font-size: clamp(1.9rem, 4vw, 3rem);
+        }
+
+        .stories-category-tabs {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.55rem;
+          margin-bottom: 2rem;
+        }
+
+        .category-tab-btn {
+          padding: 0.5rem 1.25rem;
+          font-size: 0.85rem;
+        }
+
+        .story-left-media {
+          padding: 3.5rem 2.5rem;
+          min-height: 380px;
+        }
+
+        .story-company-name {
+          font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+        }
+
+        .story-subtitle-text {
+          font-size: 1.05rem;
+        }
+
+        .story-right-editorial {
+          padding: 3rem 2.5rem;
+        }
+
+        .deliverables-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+          .stories-main-title {
+            font-size: clamp(1.5rem, 5.5vw, 2.1rem) !important;
+          }
+
+          .stories-category-tabs {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 0.4rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+
+          .stories-category-tabs::-webkit-scrollbar {
+            display: none;
+          }
+
+          .category-tab-btn {
+            padding: 0.4rem 0.95rem !important;
+            font-size: 0.78rem !important;
+            flex-shrink: 0;
+          }
+
+          .story-left-media {
+            padding: 2rem 1.25rem !important;
+            min-height: auto !important;
+          }
+
+          .story-company-name {
+            font-size: 1.35rem !important;
+          }
+
+          .story-subtitle-text {
+            font-size: 0.9rem !important;
+          }
+
+          .story-right-editorial {
+            padding: 1.65rem 1.25rem !important;
+          }
+
+          .deliverables-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.4rem !important;
+          }
+
+          .story-action-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+
+          .story-deploy-btn {
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
